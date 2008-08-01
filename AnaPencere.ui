@@ -1,0 +1,41 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="buttonBURN" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>200</y>
+     <width>101</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>BURN</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="linecdismi" >
+   <property name="geometry" >
+    <rect>
+     <x>130</x>
+     <y>130</y>
+     <width>141</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
