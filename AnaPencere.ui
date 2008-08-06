@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>441</width>
     <height>300</height>
    </rect>
   </property>
@@ -15,8 +15,8 @@
   <widget class="QPushButton" name="buttonBURN" >
    <property name="geometry" >
     <rect>
-     <x>140</x>
-     <y>200</y>
+     <x>150</x>
+     <y>240</y>
      <width>101</width>
      <height>28</height>
     </rect>
@@ -28,8 +28,8 @@
   <widget class="QLineEdit" name="linecdismi" >
    <property name="geometry" >
     <rect>
-     <x>130</x>
-     <y>130</y>
+     <x>150</x>
+     <y>60</y>
      <width>141</width>
      <height>24</height>
     </rect>

@@ -1,13 +1,13 @@
 #include <QApplication>
-#include <QMessageBox>
+
 
 #include "AnaPencere.h"
 
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv[])
 {
     QApplication a(argc, argv);
-    AnaPencere p;
-     p.show();
-     return a.exec();
+    AnaPencere *p=new AnaPencere;
+    p->show();
+    return a.exec();
 }   	
