@@ -2,7 +2,10 @@
 #include <QMessageBox>
 #include <QSettings>  //ayar dosyasına ulasmak için (home altında rc)
 #include <QLabel>
-#include <qprocess.h>
+#include <QtCore/QDebug>
+#include <QtCore/QProcess>
+#include <QtCore/QDir>
+
 
 #include "ui_AnaPencere.h"
 
@@ -16,8 +19,8 @@ class AnaPencere:public QMainWindow, Ui::MainWindow     //anapencereqMainwindowd
 
 		setupUi(this);
                 setWindowTitle("OLRIC");
-	        connect(buttonBURN, SIGNAL(clicked()), this, SLOT(slotburn()));   //linecdismi->text()
-                
+	        connect(buttonBURN, SIGNAL(clicked()), this, SLOT(slotburn()));
+
         }
 
         public slots:
