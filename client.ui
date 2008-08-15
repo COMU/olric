@@ -1,0 +1,136 @@
+<ui version="4.0" >
+ <class>Dialogclient</class>
+ <widget class="QDialog" name="Dialogclient" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>615</width>
+    <height>426</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <widget class="QLineEdit" name="lineemail" >
+   <property name="geometry" >
+    <rect>
+     <x>150</x>
+     <y>150</y>
+     <width>211</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineparola" >
+   <property name="geometry" >
+    <rect>
+     <x>150</x>
+     <y>190</y>
+     <width>211</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="linemakina_adi" >
+   <property name="geometry" >
+    <rect>
+     <x>150</x>
+     <y>230</y>
+     <width>211</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="linekullanici_adi" >
+   <property name="geometry" >
+    <rect>
+     <x>150</x>
+     <y>270</y>
+     <width>211</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>54</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>E-MAİL</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>190</y>
+     <width>61</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>PAROLA</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>71</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>MAKİNA ADİ</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>270</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>KULLANICI ADI</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buttonkaydet" >
+   <property name="geometry" >
+    <rect>
+     <x>350</x>
+     <y>350</y>
+     <width>121</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>KAYDET</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>461</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>KULANICI SERTİFİKASI OLUŞTURULACAKTIR.GEREKLİ  BİLGİLERİ GİRİNİZ. </string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

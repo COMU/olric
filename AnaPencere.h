@@ -18,13 +18,14 @@ class AnaPencere:public QMainWindow, Ui::MainWindow     //anapencereqMainwindowd
 	{
 
 		setupUi(this);
-                setWindowTitle("OLRIC");
+                setWindowTitle("OpenvpnLeCreator");
 	        connect(buttonBURN, SIGNAL(clicked()), this, SLOT(slotburn()));
-
+                connect(buttonclient, SIGNAL(clicked()), this, SLOT(slotclient()));
+ 
         }
 
         public slots:
               void slotburn();
-     
-         
+              void slotclient();
+
 };			

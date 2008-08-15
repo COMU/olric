@@ -10,4 +10,4 @@ int main(int argc, char *argv[])
     AnaPencere *p=new AnaPencere;
     p->show();
     return a.exec();
-}   	
+}
