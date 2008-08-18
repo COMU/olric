@@ -5,6 +5,9 @@
 #include <QDataStream>
 #include <QtGlobal>
 
+#include <iostream>
+#include <fstream>
+
 #include "client.h"
 #include "ui_client.h"
 
@@ -17,7 +20,8 @@ class pencereclient:public QDialog, Ui::Dialogclient
              setupUi(this);
              connect(buttonkaydet, SIGNAL(clicked()), this, SLOT(slotnesneclient()));
          }
-        void temizle()
+       
+       void temizle()
 	{
 		lineemail->clear();
 		lineparola->clear();
@@ -25,32 +29,57 @@ class pencereclient:public QDialog, Ui::Dialogclient
                 linekullanici_adi->clear();
          }
                
-     bool dosyaya_yazma(QString FileName,QString knm,QString giris) //dosya icerigini silio
-    {
+      /* bool dosyaya_yazma(QString FileName,QString knm,QString giris) //dosya icerigini silio
+        {
         QString konum=knm;
         QString  veri= giris;
-        qint64 pos;
         QFile f( FileName );
-	if ( f.open( QFile::ReadWrite | QFile::Text ) )
+	if ( f.open( QFile::ReadWrite | QFile::Text ) )  //append yazmıo
 	{
-	       QTextStream in(&f);
-               while (!in.atEnd()) {
-                 QString line = in.readLine();
-                 if(line==konum){ 
-                   pos=f.QIODevice::pos();
-                    break; 
-                    }
-                }
-                QTextStream out( &f );
-                f.QIODevice::seek(pos); 
-		out << veri;
-		f.close();
-		return true;
-	}
-	return false;
-}
-
-	
+              QTextStream out_in(&f, QIODevice::ReadWrite);
+              while(!out_in.atEnd()){
+                    QString line = out_in.readLine();
+                     if(line==konum){ 
+                         out_in << veri;
+		         return true; 
+                          } 
+           }      }
+           f.close();
+	  return false;
+          }*/
+     
+        bool dosyaac_yaz(char* FileName,QString knm,QString giris) //tek  Qtextstream ile de sona yazıo
+        {
+        QString konum=knm;
+        QString  veri= giris;
+        FILE *f = fopen(FileName, "a+t"); 
+        if(!f) QMessageBox::information(this,QString::fromUtf8("bilgilendrir\n"), QString::fromUtf8("dosya acılamıo")) ;	
+              QTextStream out_in(f, QIODevice::ReadWrite);
+              while(!out_in.atEnd()){
+                    QString line = out_in.readLine();
+                     if(line==konum){                               //rdesktop buluo
+                         QMessageBox::information(this, QString::fromUtf8("bilgilendrir\n"), QString::fromUtf8("rdesktop bulundu."));
+                         out_in << veri;
+		         return true; 
+                          } 
+                 }
+          fclose(f);
+	  return false;
+          }
+        
+     
+/*             
+         QFile file("box.txt");// qint64 QIODevice::readLine ( char * data, qint64 maxSize )This function reads a line of ASCII characters from the device
+          char buf[knm.size()];
+          
+          if (file.open(QFile::ReadOnly)) {
+            char buf[1024];
+             qint64 lineLength = file.readLine(buf, sizeof(buf));
+             if (lineLength != -1) {
+                 // the line is available in buf
+             }
+         }
+*/	
    public slots:
    void slotnesneclient()
    {
@@ -62,43 +91,30 @@ class pencereclient:public QDialog, Ui::Dialogclient
           return;
       }
          QString dosya="/home/meltem/dosya";
+         char* dddosya="/home/meltem/dosya";
          QStringList rdesk;
           rdesk.clear();
-          rdesk.append("rdesktop");
+          rdesk.append("");
           rdesk.append("-u");
           rdesk.append(c.kullanici_adi);
           rdesk.append(c.makina_adi);
          QString rdesktop=QString(rdesk.join(" "));
 
-          dosyaya_yazma(dosya,"rdesktop",rdesktop);
-    //     dosyaya_yazma(dosya,rdesktop);
-
-      
+          dosyaac_yaz(dddosya,"rdesktop",rdesktop);
         /* QFile file(dosya);  //  	rdesktop    -u     c d    d c binary dosya
          file.open(QIODevice::WriteOnly  | QIODevice::Text); 
          QDataStream out(&file);
-             out<<"rdesktop"<<"-u"<<c.kullanici_adi<<c.makina_adi;
-  */
+             out<<"rdesktop"<<"-u"<<c.kullanici_adi<<c.makina_adi; rdesk.append("-u");
+       */
 
-        // FILE *f = fopen("/home/meltem/dosya", "a+t");  //text
-        // if(!f)
-/*             
-         QFile file("box.txt");
-         if (file.open(QFile::ReadOnly)) {
-             char buf[1024];
-             qint64 lineLength = file.readLine(buf, sizeof(buf));
-             if (lineLength != -1) {
-                 // the line is available in buf
-             }
-         }
-            
-            QFile file("in.txt");
+ 
+  /*          QFile file("in.txt");
      if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
          return;
 
-     QTextStream in(&file);
-     while (!in.atEnd()) {
-         QString line = in.readLine();
+          QTextStream in(&file);
+          while (!in.atEnd()) {
+          QString line = in.readLine();
 
          QFile file("box.txt");
          if (file.open(QFile::ReadOnly)) {
@@ -111,11 +127,11 @@ class pencereclient:public QDialog, Ui::Dialogclient
 
      }
    
-
+ QMessageBox::information(this, QString::fromUtf8("bilgilendrir\n"), line); 
 */
 
       temizle(); 
-      accept();  //bilgileri sıfırlıo yeni giriiler için 
+    //  accept();  //bilgileri sıfırlıo yeni giriiler için 
      }
 };
 
