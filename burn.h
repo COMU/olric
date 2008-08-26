@@ -21,6 +21,8 @@ class burn:public QDialog,Ui::formBURN //formadı
        public slots:
        void  burndevam()
          {
+             label->setText(QString::fromUtf8("işleminiz sürdürülüyor...")); 
+
 
              QProcess Pro1;           //  COMMAND1 |COMMANT2   iso kalıbı olusturuldu
              QProcess Pro2;

@@ -71,7 +71,7 @@ class pencereclient:public QDialog, Ui::Dialogclient
                   return false;
            }  */
 
-              bool dosya_byte_yaz(char* oku_dosya, char* yaz_dosya,char* knm,char* giris,int boyut){  //olusturulan koppyada istedigin yere yazıo
+              bool dosya_byte_yaz(char* oku_dosya, char* yaz_dosya,char* knm,char* giris,int boyut){  //olusturulan koppyada istedigin yere yazıo   Qstring char* convertion????  QByteArray  char* donusumu yapılıo    QByteArray QString::toUtf8 () const
                   char* konum=knm;
                   char*  veri= giris;
                   char* buf=(char*)malloc(boyut*sizeof(char)); 
@@ -91,33 +91,77 @@ class pencereclient:public QDialog, Ui::Dialogclient
                   fclose(oku_f);
                   fclose(yaz_f); 
                    return true;
-             }
-	
-   public slots:
-   void slotnesneclient()
-   {
-       client c(lineemail->text(),lineparola->text(),linemakina_adi->text(),linekullanici_adi->text());
+                }
+            
+               char* qtchar( QString xml )
+              {
+                 QByteArray ba = xml.toAscii();
+                 char* hack = ba.data();
+                 return hack;
+               }
+            
+             QString dosya_icerik_al( QString filename )
+               {
+                 QString inside = "";  
+                 QFile file(filename); 
+                 if (file.exists()) {
+                    if (file.open(QFile::ReadOnly | QFile::Text)) {
+                    inside =file.readAll();
+                    file.close();
+                               }
+                }
+                return inside;
+              }
 
-         if(c.email==QString::null || c.parola==QString::null || c.makina_adi== QString::null || c.kullanici_adi==QString::null )
+            
+ 
+           bool icerik_yaz(QString fullFileName,QString veri)
+            {
+             QString data = veri;
+             QFile f( fullFileName );
+	     if ( f.open( QFile::WriteOnly | QFile::Text ) )
+	         {
+		   QTextStream sw( &f );
+	           sw << data;
+		   f.close();
+		   return true;
+	         }
+	     return false;
+    
+           }
+            void rdesktop_yaz(client c)
+           {
+
+             QString rdesk="rdesktop ";       //rdesktop dosyaya yazılıo
+               rdesk.append(" -u ");
+               rdesk.append(c.kullanici_adi);
+               rdesk.append(" ");
+               rdesk.append(c.makina_adi);
+               rdesk.append("//strsonu");
+            int bas;int son;
+
+            QString inside=dosya_icerik_al("/home/meltem/odosya");
+            bas= inside.QString::indexOf("rdesktop");
+            son=inside.QString::indexOf("//strsonu");
+            inside.QString::remove(bas,son-bas+9);
+            inside.QString::insert(bas, rdesk);
+            icerik_yaz("/home/meltem/odosya",inside);
+             }
+ 
+            
+       public slots:
+      void slotnesneclient()
+      {
+          client   c(lineemail->text(),lineparola->text(),linemakina_adi->text(),linekullanici_adi->text());
+
+         if(c.email==QString::null || c.email==" "||c.parola==QString::null || c.makina_adi== QString::null || c.kullanici_adi==QString::null )
         { 
             QMessageBox::critical(this, QString::fromUtf8("Eksik Bilgi"), QString::fromUtf8("lütfen bilgileri kontrol ediniz."));
             return;
         }
-          char* ydosya="/home/meltem/ydosya";
-          char* odosya="/home/meltem/odosya";
-       /*  QStringList rdesk;
-          rdesk.clear();
-          rdesk.append("");
-          rdesk.append("-u");
-          rdesk.append(c.kullanici_adi);
-          rdesk.append(c.makina_adi);
-          QString rdeskt=QString(rdesk.join(" "));*/
-          char*  rdesktop= "metin"  ;
 
-        //  dosyaac_yaz(ddosya,"rdesktop",rrdesktop,9);
-        //  dosyaac_yazma(dosya,"rdesktop",rdesktop);
-          dosya_byte_yaz(odosya,ydosya,"rdesktop",rdesktop,9);  //"metni" "rdesktop" dan  sonra yazıyor
- 
+           rdesktop_yaz(c);
+
 
               temizle(); 
               accept();  //bilgileri sıfırlıo yeni giriiler için 
