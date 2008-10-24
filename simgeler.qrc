@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/yeni" >
+        <file>icons/olric.png</file>
+ </qresource>
+</RCC>
