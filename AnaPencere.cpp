@@ -3,7 +3,10 @@
 
 #include "AnaPencere.h"
 #include "pencereclient.h"
-
+ static const char * const listEntries[] = {
+     QT_TRANSLATE_NOOP("MainWindow", "First"),
+     0
+ };
 
 AnaPencere::AnaPencere():QMainWindow()
 {
@@ -35,7 +38,6 @@ void AnaPencere::buttongrouplayout()
 {
           buttongroup=new QGroupBox;
           QGridLayout *layout = new QGridLayout;
-         // QVBoxLayout *layout=new QVBoxLayout;
 
          serverbutton = new QPushButton(tr("&Sunucu"));
          serverbutton->setDefault(true);
@@ -49,9 +51,6 @@ void AnaPencere::buttongrouplayout()
           layout->addWidget(serverbutton,1,0);
           layout->addWidget(clientbutton,2,0);
           layout->addWidget(burnbutton,3,0);
-
-          //layout->setColumnStretch(1, 10);
-        //  layout->setColumnStretch(2, 20);
 
            buttongroup->setLayout(layout);
 };
@@ -151,40 +150,105 @@ void  AnaPencere::slotburn()
 
 void AnaPencere::LanguageChooser()
 {
-        QStringList qmFiles = findQmFiles();
+        QStringList lst = getDirectoryList("qm");
+        QRegExp rx((".*"+LangComboBox->currentText()));
+        rx.setPatternSyntax(QRegExp::Wildcard);
 
-        for (int i = 0; i < qmFiles.size(); ++i) {
-             if(qmFiles[i]==(".*"+LangComboBox->currentText()))
-                newApp(qmFiles[i]);
-// #ifdef Q_WS_MAC
+        for (int i = 0; i < lst.size(); ++i) {
+             if(rx.exactMatch(lst[i])){
+                newtranslator(lst[i]);
 
-                 QMessageBox::information(this, QString::fromUtf8("bilgilendrir\n"),qmFiles[i] ); 
-                }
-//     qt_mac_set_menubar_merge(false);
-// #endif
-}
+                QMessageBox::information(this, QString::fromUtf8("bilgilendrir\n"),qmFiles[i]);
+             }
 
- void AnaPencere::newApp(const QString &qmFile)//ekisini yooket
+};
+
+ void AnaPencere::newtranslator(const QString &qmFile)
 {
-         QTranslator translator;
-         translator.load(qmFile);
-         qApp->installTranslator(&translator);
+         static QTranslator* translator = NULL;
+         QString langFile;
+         langFile = "qt_" + LangComboBox->currentText + ".qm";
+        if (translator!=NULL) {
+            App->removeTranslator(translator);
+            delete  translator;
+        }
+        translator = new QTranslator(0);
+        if (translator->load(langFile,(*qmFile))) {
+            App->installTranslator(translator);
 
-          AnaPencere p;
-          p.setGeometry(100,100,800,500);
-          p.show();
+            }
+};
 
+
+QStringList AnaPencere::getDirectoryList(const QString& subDirectory) {
+    RS_StringList dirList;
+
+#ifdef __APPLE__
+
+    if (subDirectory!="library") {
+#endif
+        //local (application) directory has priority over other dirs:
+        if (!appDir.isEmpty() && appDir!="/" && appDir!=getHomeDir()) {
+            dirList.append(appDir + "/" + subDirectory);
+        }
+
+        // Redhat style:
+        dirList.append("/usr/share/" + appDirName + "/" + subDirectory);
+
+        // SuSE style:
+        dirList.append("/usr/X11R6/" + appDirName + "/" + subDirectory);
+
+        dirList.append("/usr/X11R6/share/" + appDirName + "/" + subDirectory);
+        dirList.append(getHomeDir() + "/." + appDirName + "/" + subDirectory);
+
+#ifdef __APPLE__
+
+    }
+#endif
+
+#ifdef __APPLE__
+    // Mac OS X - don't scan for library since this might lead us into the
+    //  wrong directory tree:
+    if (!appDir.isEmpty() && appDir!="/" /*&& subDirectory!="library"*/) {
+        dirList.append(appDir + "/../Resources/" + subDirectory);
+        dirList.append(appDir + "/../../../" + subDirectory);
+    }
+#endif
+
+    // Individual directories:
+    RS_SETTINGS->beginGroup("/Paths");
+    if (subDirectory=="fonts") {
+        dirList += RS_StringList::split(RS_RegExp("[;]"),
+                                        RS_SETTINGS->readEntry("/Fonts", ""));
+    } else if (subDirectory=="patterns") {
+        dirList += RS_StringList::split(RS_RegExp("[;]"),
+                                        RS_SETTINGS->readEntry("/Patterns", ""));
+    } else if (subDirectory.startsWith("scripts")) {
+        dirList += RS_StringList::split(RS_RegExp("[;]"),
+                                        RS_SETTINGS->readEntry("/Scripts", ""));
+    } else if (subDirectory.startsWith("library")) {
+        dirList += RS_StringList::split(RS_RegExp("[;]"),
+                                        RS_SETTINGS->readEntry("/Library", ""));
+    } else if (subDirectory.startsWith("po")) {
+        dirList += RS_StringList::split(RS_RegExp("[;]"),
+                                        RS_SETTINGS->readEntry("/Translations", ""));
+    }
+    RS_SETTINGS->endGroup();
+
+    RS_StringList ret;
+
+    RS_DEBUG->print("RS_System::getDirectoryList: Paths:");
+    for (RS_StringList::Iterator it = dirList.begin();
+            it!=dirList.end(); ++it ) {
+
+        if (RS_FileInfo(*it).isDir()) {
+            ret += (*it);
+            RS_DEBUG->print(*it);
+        }
+    }
+
+    return ret;
 }
 
-QStringList AnaPencere::findQmFiles()
-{
-     QDir dir(":/translations");
-     QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files,QDir::Name);
-     QMutableStringListIterator i(fileNames);
-     while (i.hasNext()) {
-         i.next();
-         i.setValue(dir.filePath(i.value()));
-     }
-     return fileNames;
-}
+
 

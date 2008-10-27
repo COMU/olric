@@ -13,8 +13,8 @@
 #include <QTranslator>
 #include <QMainWindow>
 #include <QTranslator>
+#include <QRegExp>
 
-  //QLabel *label[labelsayı];
 
 class QAction;
 class QMenu;
@@ -35,10 +35,8 @@ class AnaPencere:public QMainWindow
               void actions();
               void menus();
               void buttongrouplayout();
-              void newApp(const QString &qmFile);
-              QStringList findQmFiles();
-              //enum {buttonsayı=3, labelsayı=3 };
-             //QLabel *label[labelsayı]
+              void newtranslator(const QString &qmFile);
+
               QProgressDialog *progressDialog;
               QGroupBox *buttongroup;
 
