@@ -9,16 +9,24 @@ int main(int argv, char *args[])
         QApplication app(argv, args);
 
          QString locale = QLocale::system().name();
+         QString qtdir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
          QTranslator translator;
        //  translator.load(QString("olric_") + locale);
-         translator.load("olric_en");
+         translator.load("olric_"+locale , qtdir);
          app.installTranslator(&translator);
 
-          AnaPencere p;
+         QString appdir   = app.applicationDirPath();
+         QString filename = QString("olric_") + locale;
+
+         if(!translator.load(filename, appdir + "/translations/"))
+	 translator.load(filename, appdir + "/../share/olric/translations/");
+         app.installTranslator(&translator);
+
+         AnaPencere p;
           p.setGeometry(100,100,800,500);
           p.show();
 
-           return app.exec();
+         return app.exec();
 
 }

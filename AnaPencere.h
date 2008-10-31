@@ -35,7 +35,7 @@ class AnaPencere:public QMainWindow
               void actions();
               void menus();
               void buttongrouplayout();
-              void newtranslator(const QString &qmFile);
+
 
               QProgressDialog *progressDialog;
               QGroupBox *buttongroup;
@@ -56,6 +56,6 @@ class AnaPencere:public QMainWindow
               void slotburn();
               void slotclient();
               void about();
-              void LanguageChooser();
+
 };
 
