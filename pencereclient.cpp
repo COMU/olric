@@ -23,10 +23,10 @@ pencereclient::pencereclient(QWidget *parent):QDialog(parent)
      labeleposta->setBuddy(lineEposta);
 
      buttonKaydet=new QPushButton(tr("&KAYDET"));
-     buttonKaydet->setEnabled(false);
+    // buttonKaydet->setEnabled(false);
      connect(buttonKaydet, SIGNAL(clicked()), this, SLOT(slotnesneclient()));
 
-       GridGroupBox = new QGroupBox(this);  //(tr("grup ismi"))
+       //GridGroupBox = new QGroupBox(this);  //(tr("grup ismi"))
        QGridLayout *layout = new QGridLayout;
 
       layout->addWidget(labelbos,0,0);
@@ -41,17 +41,17 @@ pencereclient::pencereclient(QWidget *parent):QDialog(parent)
       layout->addWidget(lineEposta,5,1);
       layout->addWidget(buttonKaydet,6,2);
 
-      GridGroupBox->setLayout(layout);
+      setLayout(layout); 
       setWindowTitle(tr("ISTEMCI"));
 
 };
 
 void pencereclient::temizle()
 {
-          lineKullanici_adi->clear();
-          lineMakine_adi->clear();
-          lineParola->clear();
-          lineEposta->clear();
+     lineKullanici_adi->clear();
+     lineMakine_adi->clear();
+     lineParola->clear();
+     lineEposta->clear();
 };
 
 
@@ -91,38 +91,42 @@ void pencereclient::rdesktop_yaz(client c)
        rdesk.append(c.kullanici_adi);
        rdesk.append(" ");
        rdesk.append(c.makine_adi);
-       rdesk.append("//strsonu");
            //  int bas;int son;
 
-       QString inside=dosya_icerik_al("/home/meltem/odosya");
+       QString inside=dosya_icerik_al("/home/meltem/necdet/odosya");
           //  bas= inside.QString::indexOf("rdesktop");
           //  son=inside.QString::indexOf("//strsonu");
           //  inside.QString::remove(bas,son-bas+9);
           //  inside.QString::insert(bas, rdesk);
-       QRegExp::QRegExp  rx("^rdesktop -u .{0, } .{0, }"); 
-       inside.QString::replace(rx,rdesk);
-       icerik_yaz("/home/meltem/odosya",inside);
+       QRegExp::QRegExp  rx("^\t *rdesktop -u* \t"); 
+       rx.setPatternSyntax(QRegExp::Wildcard);
+       if(rx.exactMatch(inside)){
+           inside.QString::replace(rx,rdesk);
+           }
+       else 
+           inside += "\t"+rdesk+"\t";
+       icerik_yaz("/home/meltem/necdet/odoya",inside);
 };
 
 void pencereclient::boot_duzenle()       //vpn-cd-tree kullanıcı olusturmussa
 {
-        QString inside =dosya_icerik_al("/home/meltem/ydosya");
+        QString inside =dosya_icerik_al("/home/meltem/necdet/ydosya");
         inside.replace("PROMPT 1", "PROMPT O");
-        icerik_yaz("/home/meltem/ydosya",inside);
+        icerik_yaz("/home/meltem/necdet/ydosya",inside);
 };
 
 void pencereclient::slotnesneclient()
 {
-          client  c(lineKullanici_adi->text(),lineMakine_adi->text(),lineParola->text(),lineEposta->text());
+        client  c(lineKullanici_adi->text(),lineMakine_adi->text(),lineParola->text(),lineEposta->text());
 
-         if(c.eposta.isEmpty() ||c.parola==QString::null || c.makine_adi== QString::null || c.kullanici_adi==QString::null )
-        { 
+        if(c.eposta.isEmpty() ||c.parola.isEmpty() || c.makine_adi.isEmpty() || c.kullanici_adi.isEmpty())
+        {
             QMessageBox::critical(this, QString::fromUtf8("Eksik Bilgi"), QString::fromUtf8("lütfen bilgileri kontrol ediniz."));
             return;
         }
 
-           rdesktop_yaz(c);
+        rdesktop_yaz(c);
 
-           temizle(); 
-           accept();  //bilgileri sıfırlıo yeni giriiler için 
+        temizle();
+        accept();  //bilgileri sıfırlıo yeni giriiler için 
  };

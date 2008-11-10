@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'AnaPencere.h'
 **
-** Created: Fri Oct 31 07:44:14 2008
+** Created: Tue Nov 4 20:35:32 2008
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_AnaPencere[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   10, // methods
+       4,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
 
@@ -31,13 +31,14 @@ static const uint qt_meta_data_AnaPencere[] = {
       12,   11,   11,   11, 0x0a,
       23,   11,   11,   11, 0x0a,
       36,   11,   11,   11, 0x0a,
+      44,   11,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_AnaPencere[] = {
     "AnaPencere\0\0slotburn()\0slotclient()\0"
-    "about()\0"
+    "about()\0LanguageChooser()\0"
 };
 
 const QMetaObject AnaPencere::staticMetaObject = {
@@ -68,8 +69,9 @@ int AnaPencere::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 0: slotburn(); break;
         case 1: slotclient(); break;
         case 2: about(); break;
+        case 3: LanguageChooser(); break;
         }
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
