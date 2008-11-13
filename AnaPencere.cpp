@@ -15,6 +15,7 @@ AnaPencere::AnaPencere():QMainWindow()
 
       iconolric=new QLabel;
       iconolric->setPixmap(QPixmap("/home/meltem/necdet/olric/icons/olric.png"));
+     
       LangComboBox=new QComboBox();
       LangComboBox->addItem(tr("tr"));
       LangComboBox->addItem(tr("en"));
@@ -32,11 +33,18 @@ AnaPencere::AnaPencere():QMainWindow()
 
 };
 
+QString AnaPencere::languageName(const QString &qmFile)
+ {
+     QTranslator translator;
+     translator.load(qmFile);
+
+     return translator.translate("AnaPencere","English");
+ }
+
  QStringList AnaPencere::findQmFiles()
  {
      QDir dir("/home/meltem/necdet/translations");
-     QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files,
-                                           QDir::Name);
+     QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files, QDir::Name);
      QMutableStringListIterator i(fileNames);
      while (i.hasNext()) {
          i.next();
@@ -48,15 +56,18 @@ AnaPencere::AnaPencere():QMainWindow()
 void AnaPencere::LanguageChooser()
 {
         QStringList lst = findQmFiles();
-        QRegExp rx((".*"+LangComboBox->currentText()));
+      //  QMessageBox::information(this, QString::fromUtf8("lst\n"), lst[0]);  //ana pencereyı kapatıo
+        QRegExp rx((".*"+LangComboBox->currentText()+".qm"));
         rx.setPatternSyntax(QRegExp::Wildcard);
 
         for (int i = 0; i < lst.size(); ++i) 
         {
              if(rx.exactMatch(lst[i])){
+                QMessageBox::information(this, QString::fromUtf8("esit3i2 b434nd4\n"),"içinde"); //girmio 
                 newtranslator(lst[i]);
                 }
         }
+
 };
 
  void AnaPencere::newtranslator(const QString &qmFile)
@@ -72,7 +83,7 @@ void AnaPencere::LanguageChooser()
         if (translator->load(qmFile)) {
             qApp->installTranslator(translator);
           }*/
-         QTranslator translator;
+         QTranslator translator;                      //kod yeni bir main olusturuyor ama dil dosyasını yuklemıo uzun yoolu yazdıgında
          translator.load(qmFile);
          qApp->installTranslator(&translator);
 

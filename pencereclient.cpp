@@ -12,8 +12,14 @@ pencereclient::pencereclient(QWidget *parent):QDialog(parent)
 
      labelparola = new QLabel(tr("&PAROLA :"));
      lineParola = new QLineEdit;
+     lineParola->setEchoMode(QLineEdit::Password);
      labelparola->setBuddy(lineParola);
  
+     labelparolaTekrar = new QLabel(tr("&PAROLA &TEKRAR :"));
+     lineParolaTekrar = new QLineEdit;
+     lineParolaTekrar->setEchoMode(QLineEdit::Password);
+     labelparolaTekrar->setBuddy(lineParolaTekrar);
+
      labelmakine= new QLabel(tr("&MAKINE ADI :"));
      lineMakine_adi= new QLineEdit;
      labelmakine->setBuddy(lineMakine_adi);
@@ -35,11 +41,13 @@ pencereclient::pencereclient(QWidget *parent):QDialog(parent)
       layout->addWidget(lineKullanici_adi,2,1);
        layout->addWidget(labelparola,3,0 );
       layout->addWidget(lineParola,3,1);
-       layout->addWidget(labelmakine,4,0 );
-      layout->addWidget(lineMakine_adi,4,1);
-       layout->addWidget(labeleposta,5,0 );
-      layout->addWidget(lineEposta,5,1);
-      layout->addWidget(buttonKaydet,6,2);
+      layout->addWidget(labelparolaTekrar,4,0 );
+      layout->addWidget(lineParolaTekrar,4,1);
+       layout->addWidget(labelmakine,6,0 );
+      layout->addWidget(lineMakine_adi,6,1);
+       layout->addWidget(labeleposta,7,0 );
+      layout->addWidget(lineEposta,7,1);
+      layout->addWidget(buttonKaydet,8,2);
 
       setLayout(layout); 
       setWindowTitle(tr("ISTEMCI"));
@@ -52,6 +60,7 @@ void pencereclient::temizle()
      lineMakine_adi->clear();
      lineParola->clear();
      lineEposta->clear();
+     lineParolaTekrar->clear(); 
 };
 
 
@@ -98,7 +107,7 @@ void pencereclient::rdesktop_yaz(client c)
           //  son=inside.QString::indexOf("//strsonu");
           //  inside.QString::remove(bas,son-bas+9);
           //  inside.QString::insert(bas, rdesk);
-       QRegExp::QRegExp  rx("^\t *rdesktop -u* \t"); 
+       QRegExp::QRegExp  rx("[^\t] *rdesktop -u* "); 
        rx.setPatternSyntax(QRegExp::Wildcard);
        if(rx.exactMatch(inside)){
            inside.QString::replace(rx,rdesk);
@@ -117,14 +126,19 @@ void pencereclient::boot_duzenle()       //vpn-cd-tree kullanıcı olusturmussa
 
 void pencereclient::slotnesneclient()
 {
-        client  c(lineKullanici_adi->text(),lineMakine_adi->text(),lineParola->text(),lineEposta->text());
+        if(lineParolaTekrar->text()!=lineParola->text())
+         {
+            QMessageBox::critical(this, QString::fromUtf8("Uyarı"), QString::fromUtf8("Parola eşlesme??"));
+            return;
+         }
 
-        if(c.eposta.isEmpty() ||c.parola.isEmpty() || c.makine_adi.isEmpty() || c.kullanici_adi.isEmpty())
+        client  c(lineKullanici_adi->text(),lineMakine_adi->text(),lineParola->text(),lineEposta->text(),lineParolaTekrar->text());
+
+        if(c.eposta.isEmpty() ||c.parola.isEmpty() || c.makine_adi.isEmpty() || c.kullanici_adi.isEmpty() || c.parola_tekrar.isEmpty() )
         {
             QMessageBox::critical(this, QString::fromUtf8("Eksik Bilgi"), QString::fromUtf8("lütfen bilgileri kontrol ediniz."));
             return;
         }
-
         rdesktop_yaz(c);
 
         temizle();

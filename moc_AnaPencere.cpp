@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'AnaPencere.h'
 **
-** Created: Tue Nov 4 20:35:32 2008
+** Created: Tue Nov 11 00:38:18 2008
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.1)
 **
 ** WARNING! All changes made in this file will be lost!

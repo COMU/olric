@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'pencereclient.h'
 **
-** Created: Mon Oct 20 04:10:00 2008
+** Created: Wed Nov 12 05:27:16 2008
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.1)
 **
 ** WARNING! All changes made in this file will be lost!

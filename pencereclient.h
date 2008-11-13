@@ -33,10 +33,12 @@ class pencereclient:public QDialog
           QLabel *labelmakine;
           QLabel *labelparola;
           QLabel *labeleposta;
+          QLabel *labelparolaTekrar;
           QLineEdit *lineKullanici_adi;
           QLineEdit *lineMakine_adi;
           QLineEdit *lineParola;
           QLineEdit *lineEposta;
+          QLineEdit *lineParolaTekrar;
           QPushButton *buttonKaydet;
 
 };

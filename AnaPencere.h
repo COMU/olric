@@ -37,6 +37,9 @@ class AnaPencere:public QMainWindow
               void buttongrouplayout();
               void newtranslator(const QString &qmFile);
               QStringList findQmFiles();
+              QString languageName(const QString &qmFiles);
+
+              QStringList qmFiles;
 
               QProgressDialog *progressDialog;
               QGroupBox *buttongroup;
