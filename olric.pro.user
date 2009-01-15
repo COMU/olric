@@ -1,0 +1,246 @@
+<!DOCTYPE QtCreatorProject>
+<qtcreator>
+ <data>
+  <variable>RunConfiguration0-CommandLineArguments</variable>
+  <valuelist type="QVariantList" />
+ </data>
+ <data>
+  <variable>RunConfiguration0-ProFile</variable>
+  <value type="QString" >/home/meltem/Olric/olric/olric.pro</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-RunConfiguration.name</variable>
+  <value type="QString" >olric</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-type</variable>
+  <value type="QString" >Qt4ProjectManager.Qt4RunConfiguration</value>
+ </data>
+ <data>
+  <variable>activeRunConfiguration</variable>
+  <value type="int" >0</value>
+ </data>
+ <data>
+  <variable>activebuildconfiguration</variable>
+  <value type="QString" >Release</value>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="QtVersionId" type="int" >2</value>
+   <value key="addQDumper" type="" ></value>
+   <value key="buildDirectory" type="QString" >/home/meltem/Olric/olric</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >CVS_RSH=ssh</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ePb2iba2Aw,guid=4478e90f85a853824c97bb33496e0644</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >EDITOR=/bin/nano</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-FwvDxg/S.gpg-agent:2152:1</value>
+    <value type="QString" >GS_LIB=/home/meltem/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/meltem/.gtkrc-2.0:/home/meltem/.kde3.5/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/meltem/.gtkrc:/home/meltem/.kde3.5/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/meltem</value>
+    <value type="QString" >HOSTNAME=meltem-pardus</value>
+    <value type="QString" >INFOPATH=/usr/share/info</value>
+    <value type="QString" >JAVA_HOME=/opt/sun-jre</value>
+    <value type="QString" >KDEDIR=/usr/kde/3.5</value>
+    <value type="QString" >KDEDIRS=/usr</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MALLOC=1</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >LADSPA_PATH=/usr/lib/ladspa</value>
+    <value type="QString" >LANG=tr_TR.UTF-8</value>
+    <value type="QString" >LC_ALL=tr_TR.UTF-8</value>
+    <value type="QString" >LD_BIND_DIRECT=1</value>
+    <value type="QString" >LESS=-R -M --shift 5</value>
+    <value type="QString" >LESSCOLOR=yes</value>
+    <value type="QString" >LESSOPEN=|lesspipe.sh %s</value>
+    <value type="QString" >LOGNAME=meltem</value>
+    <value type="QString" >MANPATH=/usr/local/share/man:/usr/share/man:/opt/sun-jre/man:/usr/qt/3/doc/man:/usr/kde/3.5/man</value>
+    <value type="QString" >MOZ_DISABLE_GCONF=1</value>
+    <value type="QString" >OLDPWD=/home/meltem</value>
+    <value type="QString" >PAGER=/usr/bin/less</value>
+    <value type="QString" >PATH=/usr/qt/4/bin:/usr/kde/3.5/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/opt/sun-jre/bin:/usr/qt/3/bin:/usr/kde/3.5/bin</value>
+    <value type="QString" >PKG_CONFIG_PATH=/usr/qt/3/lib/pkgconfig:/usr/qt/4/lib/pkgconfig:/usr/kde/3.5/lib/pkgconfig</value>
+    <value type="QString" >PWD=/home/meltem</value>
+    <value type="QString" >PYTHONSTARTUP=/etc/pythonstart</value>
+    <value type="QString" >QMAKESPEC=linux-g++</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >SANE_CONFIG_DIR=/etc/sane.d</value>
+    <value type="QString" >SESSION_MANAGER=local/meltem-pardus:@/tmp/.ICE-unix/2204,unix/meltem-pardus:/tmp/.ICE-unix/2204</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=2155</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-EfeUoL2154/agent.2154</value>
+    <value type="QString" >USER=meltem</value>
+    <value type="QString" >XAUTHLOCALHOSTNAME=meltem-pardus</value>
+    <value type="QString" >XCURSOR_THEME=default</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/usr/kde/3.5/etc/xdg</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/kde/3.5/share:/usr/share</value>
+    <value type="QString" >XDG_SESSION_COOKIE=0bf3ea9bf2f2ed5298384f5a486cb8d4-1231947331.94796-1277339296</value>
+    <value type="QString" >XDM_MANAGED=/var/run/xdmctl/xdmctl-:0,maysd,mayfn,sched,rsvd,method=classic</value>
+    <value type="QString" >XINITRC=/etc/X11/xinit/xinitrc</value>
+    <value type="QString" >_=/usr/kde/3.5/bin/start_kdeinit_wrapper</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >/home/meltem/Olric/olric/olric.pro</value>
+    <value type="QString" >-spec</value>
+    <value type="QString" >/usr/qt/4/mkspecs/linux-g++</value>
+    <value type="QString" >-r</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/meltem/Olric/olric</value>
+   <value key="buildConfiguration" type="int" >0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep2</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >CVS_RSH=ssh</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ePb2iba2Aw,guid=4478e90f85a853824c97bb33496e0644</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >EDITOR=/bin/nano</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-FwvDxg/S.gpg-agent:2152:1</value>
+    <value type="QString" >GS_LIB=/home/meltem/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/meltem/.gtkrc-2.0:/home/meltem/.kde3.5/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/meltem/.gtkrc:/home/meltem/.kde3.5/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/meltem</value>
+    <value type="QString" >HOSTNAME=meltem-pardus</value>
+    <value type="QString" >INFOPATH=/usr/share/info</value>
+    <value type="QString" >JAVA_HOME=/opt/sun-jre</value>
+    <value type="QString" >KDEDIR=/usr/kde/3.5</value>
+    <value type="QString" >KDEDIRS=/usr</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MALLOC=1</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >LADSPA_PATH=/usr/lib/ladspa</value>
+    <value type="QString" >LANG=tr_TR.UTF-8</value>
+    <value type="QString" >LC_ALL=tr_TR.UTF-8</value>
+    <value type="QString" >LD_BIND_DIRECT=1</value>
+    <value type="QString" >LESS=-R -M --shift 5</value>
+    <value type="QString" >LESSCOLOR=yes</value>
+    <value type="QString" >LESSOPEN=|lesspipe.sh %s</value>
+    <value type="QString" >LOGNAME=meltem</value>
+    <value type="QString" >MANPATH=/usr/local/share/man:/usr/share/man:/opt/sun-jre/man:/usr/qt/3/doc/man:/usr/kde/3.5/man</value>
+    <value type="QString" >MOZ_DISABLE_GCONF=1</value>
+    <value type="QString" >OLDPWD=/home/meltem</value>
+    <value type="QString" >PAGER=/usr/bin/less</value>
+    <value type="QString" >PATH=/usr/qt/4/bin:/usr/kde/3.5/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/opt/sun-jre/bin:/usr/qt/3/bin:/usr/kde/3.5/bin</value>
+    <value type="QString" >PKG_CONFIG_PATH=/usr/qt/3/lib/pkgconfig:/usr/qt/4/lib/pkgconfig:/usr/kde/3.5/lib/pkgconfig</value>
+    <value type="QString" >PWD=/home/meltem</value>
+    <value type="QString" >PYTHONSTARTUP=/etc/pythonstart</value>
+    <value type="QString" >QMAKESPEC=linux-g++</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >SANE_CONFIG_DIR=/etc/sane.d</value>
+    <value type="QString" >SESSION_MANAGER=local/meltem-pardus:@/tmp/.ICE-unix/2204,unix/meltem-pardus:/tmp/.ICE-unix/2204</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=2155</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-EfeUoL2154/agent.2154</value>
+    <value type="QString" >USER=meltem</value>
+    <value type="QString" >XAUTHLOCALHOSTNAME=meltem-pardus</value>
+    <value type="QString" >XCURSOR_THEME=default</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/usr/kde/3.5/etc/xdg</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/kde/3.5/share:/usr/share</value>
+    <value type="QString" >XDG_SESSION_COOKIE=0bf3ea9bf2f2ed5298384f5a486cb8d4-1231947331.94796-1277339296</value>
+    <value type="QString" >XDM_MANAGED=/var/run/xdmctl/xdmctl-:0,maysd,mayfn,sched,rsvd,method=classic</value>
+    <value type="QString" >XINITRC=/etc/X11/xinit/xinitrc</value>
+    <value type="QString" >_=/usr/kde/3.5/bin/start_kdeinit_wrapper</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/meltem/Olric/olric</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfigurations</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >Release</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="mkspec" type="QString" ></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep2</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildsteps</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.gdbmaros</value>
+   <value type="QString" >trolltech.qt4projectmanager.qmake</value>
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="clean" type="bool" >true</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>cleansteps</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>defaultFileEncoding</variable>
+  <value type="QByteArray" >System</value>
+ </data>
+ <data>
+  <variable>project</variable>
+  <valuemap type="QVariantMap" />
+ </data>
+</qtcreator>
