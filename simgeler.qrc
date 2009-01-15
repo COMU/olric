@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/yeni" > 
-       <file>icons/olric.png</file>
-       <file>translations/olric_en.qm</file>
- </qresource>
-</RCC>
