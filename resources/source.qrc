@@ -1,0 +1,5 @@
+<RCC>
+   <qresource prefix="/">
+         <file>olric_tr_TR.qm</file>
+   </qresource>
+</RCC>
