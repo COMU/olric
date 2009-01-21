@@ -1,18 +1,28 @@
 #ifndef CLIENT_H
 #define CLIENT_H
- #include <QtCore/QString>
+
+#include <QtCore/QString>
+#include <QByteArray>
+
+#include "tool.h"
+
 class client
 {
    private:
 
      QString eposta;
-     QString parola;
-     QString makine_adi;
-     QString kullanici_adi;
+     QString passwd;
+     QString machineName;
+     QString userName;
+     QString UnitName;
+     QString CompanyName;
 
    public:
-     client( QString, QString, QString, QString);
-
+     client( QString, QString, QString, QString ,QString, QString);
+     void rdesktop();
+     void buildCilentKey();
+     void run();
 };
 
 #endif // CLIENT_H
+
