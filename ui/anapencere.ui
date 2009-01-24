@@ -1,25 +1,26 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
+    <width>550</width>
     <height>470</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <layout class="QGridLayout" name="gridLayout_2" >
-    <item row="1" column="0" >
-     <spacer name="horizontalSpacer" >
-      <property name="orientation" >
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <property name="sizeHint" stdset="0" >
+      <property name="sizeHint" stdset="0">
        <size>
         <width>262</width>
         <height>20</height>
@@ -27,264 +28,262 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1" >
-     <widget class="QPushButton" name="pushButton_Burn" >
-      <property name="text" >
+    <item row="1" column="1">
+     <widget class="QPushButton" name="pushButton_Burn">
+      <property name="text">
        <string>Burn</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2" >
-     <widget class="QTabWidget" name="tabWidget" >
-      <property name="currentIndex" >
+    <item row="0" column="0" colspan="2">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab" >
-       <attribute name="title" >
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
         <string>&amp;Server</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3" >
-        <item row="0" column="0" >
-         <widget class="QLabel" name="label_8" >
-          <property name="text" >
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
            <string>Server Ip</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1" >
-         <widget class="QLineEdit" name="ServerIp" />
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="ServerIp"/>
         </item>
-        <item row="1" column="0" >
-         <widget class="QLabel" name="label_9" >
-          <property name="text" >
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
            <string>Country Name(2 letter code)</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" >
-         <widget class="QLineEdit" name="Key_Country" />
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="Key_Country"/>
         </item>
-        <item row="7" column="1" >
-         <widget class="QLineEdit" name="Key_Org" />
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="Key_Org"/>
         </item>
-        <item row="2" column="1" >
-         <widget class="QLineEdit" name="Key_Province" />
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="Key_Province"/>
         </item>
-        <item row="2" column="0" >
-         <widget class="QLabel" name="label_10" >
-          <property name="text" >
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
            <string>State or Province Name</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="0" >
-         <widget class="QLabel" name="label_11" >
-          <property name="text" >
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
            <string>Locality Name</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1" >
-         <widget class="QLineEdit" name="Key_City" />
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="Key_City"/>
         </item>
-        <item row="7" column="0" >
-         <widget class="QLabel" name="label_12" >
-          <property name="text" >
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
            <string>Organization Name</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="0" >
-         <widget class="QLabel" name="label_13" >
-          <property name="text" >
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
            <string>Organizational Unit Name</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1" >
-         <widget class="QLineEdit" name="Key_UnitName" />
+        <item row="8" column="1">
+         <widget class="QLineEdit" name="Key_UnitName"/>
         </item>
-        <item row="9" column="0" >
-         <widget class="QLabel" name="label_14" >
-          <property name="text" >
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
            <string>Common Name</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1" >
-         <widget class="QLineEdit" name="Key_CommonName" />
+        <item row="9" column="1">
+         <widget class="QLineEdit" name="Key_CommonName"/>
         </item>
-        <item row="10" column="0" >
-         <widget class="QLabel" name="label_15" >
-          <property name="text" >
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
            <string>Email Adres</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="1" >
-         <widget class="QLineEdit" name="Key_Email" />
+        <item row="10" column="1">
+         <widget class="QLineEdit" name="Key_Email"/>
         </item>
-        <item row="11" column="0" >
-         <widget class="QLabel" name="label_16" >
-          <property name="text" >
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
            <string>Challenge Passwd</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="1" >
-         <widget class="QLineEdit" name="Server_passwd" />
+        <item row="11" column="1">
+         <widget class="QLineEdit" name="Server_passwd"/>
         </item>
-        <item row="12" column="0" >
-         <widget class="QLabel" name="label_17" >
-          <property name="text" >
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
            <string>Optional Company Name</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="1" >
-         <widget class="QLineEdit" name="Server_CompanyName" />
+        <item row="12" column="1">
+         <widget class="QLineEdit" name="Server_CompanyName"/>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2" >
-       <attribute name="title" >
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
         <string>&amp;Client</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout" >
-        <item row="0" column="0" >
-         <widget class="QLabel" name="label" >
-          <property name="text" >
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
            <string>User name</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>client_userName</cstring>
           </property>
          </widget>
         </item>
-        <item row="0" column="1" >
-         <widget class="QLineEdit" name="client_userName" />
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="client_userName"/>
         </item>
-        <item row="1" column="0" >
-         <widget class="QLabel" name="label_2" >
-          <property name="text" >
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
            <string>Passwd</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>client_passwd</cstring>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" >
-         <widget class="QLineEdit" name="client_passwd" >
-          <property name="echoMode" >
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="client_passwd">
+          <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" >
-         <widget class="QLabel" name="label_3" >
-          <property name="text" >
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
            <string>Passwd again</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>client_2passwd</cstring>
           </property>
          </widget>
         </item>
-        <item row="2" column="1" >
-         <widget class="QLineEdit" name="client_2passwd" >
-          <property name="mouseTracking" >
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="client_2passwd">
+          <property name="mouseTracking">
            <bool>true</bool>
           </property>
-          <property name="echoMode" >
+          <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
          </widget>
         </item>
-        <item row="3" column="0" >
-         <widget class="QLabel" name="label_4" >
-          <property name="text" >
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
            <string>Machine name</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>client_machineName</cstring>
           </property>
          </widget>
         </item>
-        <item row="3" column="1" >
-         <widget class="QLineEdit" name="client_machineName" />
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="client_machineName"/>
         </item>
-        <item row="4" column="0" >
-         <widget class="QLabel" name="label_5" >
-          <property name="text" >
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
            <string>E-mail</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>client_email</cstring>
           </property>
          </widget>
         </item>
-        <item row="4" column="1" >
-         <widget class="QLineEdit" name="client_email" />
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="client_email"/>
         </item>
-        <item row="5" column="0" >
-         <widget class="QLabel" name="label_6" >
-          <property name="text" >
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
            <string>Organizational Unit Name</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="1" >
-         <widget class="QLineEdit" name="client_UnitName" />
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="client_UnitName"/>
         </item>
-        <item row="6" column="0" >
-         <widget class="QLabel" name="label_7" >
-          <property name="text" >
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
            <string>Optional Company Name</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1" >
-         <widget class="QLineEdit" name="client_CompanyName" />
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="client_CompanyName"/>
         </item>
        </layout>
       </widget>
      </widget>
     </item>
    </layout>
-   <zorder>pushButton_Burn</zorder>
-   <zorder>tabWidget</zorder>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>510</width>
-     <height>29</height>
+     <width>550</width>
+     <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHakk_nda" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHakk_nda">
+    <property name="title">
      <string>about</string>
     </property>
-    <addaction name="separator" />
-    <addaction name="actionOlric" />
-    <addaction name="actionQt" />
+    <addaction name="separator"/>
+    <addaction name="actionOlric"/>
+    <addaction name="actionQt"/>
    </widget>
-   <addaction name="menuHakk_nda" />
+   <addaction name="menuHakk_nda"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
-  <action name="actionOlric" >
-   <property name="text" >
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOlric">
+   <property name="text">
     <string>olric</string>
    </property>
-   <property name="visible" >
+   <property name="visible">
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionQt" >
-   <property name="text" >
+  <action name="actionQt">
+   <property name="text">
     <string>qt</string>
    </property>
   </action>

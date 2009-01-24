@@ -10,11 +10,13 @@
 #include <QTextStream>
 #include <QProcess>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
 
 
 using namespace std;
  QString dosya_icerik_al( QString filename );
  bool icerik_yaz(QString FileName,QString veri );
-
+ QFileInfoList findFile(QString Path,QString SearchFile );
 
 #endif // TOOL_H
