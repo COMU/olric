@@ -30,18 +30,4 @@ bool icerik_yaz(QString fullFileName,QString veri)
       return false;
 }
 
-QFileInfoList findFile(QString Path,QString SearchFile ){
-  QDir dir(Path);
 
-  QStringList filters;
-  filters << SearchFile;
-  dir.setNameFilters(filters);
-
-  QFileInfoList list = dir.entryInfoList();
-  for (int i = 0; i < list.size(); ++i) {
-    QFileInfo fileInfo = list.at(i);
-    qDebug()<< fileInfo.fileName();     //QString("%1").arg(fileInfo.fileName());
-
-  }
-  return list;
-}

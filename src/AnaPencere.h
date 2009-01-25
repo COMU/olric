@@ -15,7 +15,6 @@ class AnaPencere:public QMainWindow, Ui::MainWindow
 
              AnaPencere();
 
-
        private :
 
              bool line_kontrol();
