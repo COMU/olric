@@ -85,6 +85,7 @@ void AnaPencere::buildDHParam()
 {
     QProcess process2;
     process2.setWorkingDirectory(getOpenVPNPath());
+    process2.waitForFinished(5000);
     process2.start( "openssl dhparam -out dh1024.pem 1024");
 
     if (!process2.waitForFinished())   qDebug() << "failed:dh" << process2.errorString();
@@ -138,7 +139,8 @@ void AnaPencere::buildKeyServer()
 
 
     QProcess process3;
-    process3.setWorkingDirectory(getOpenVPNPath());
+    process3.setWorkingDirectory(getOpenVPNPath());   
+    process3.waitForFinished(5000);
     process3.start(str);
     process3.write(byte_arry);
 
@@ -180,7 +182,7 @@ void AnaPencere::orderOpenSSLCNF()
 
     QString ssl_files= getFileContent(getOpenVPNPath()+"/openssl.cnf");
 
-    ssl_files.replace("$ENV::KEY_DIR" ,	getOpenVPNPath());
+    ssl_files.replace("$ENV::KEY_DIR" ,	getOpenVPNPath()+"/keys");
     ssl_files.replace("$ENV::KEY_SIZE" ,"1024");
     ssl_files.replace("$ENV::KEY_COUNTRY", Key_country->text());
     ssl_files.replace("$ENV::KEY_PROVINCE" , Key_province->text());
@@ -218,13 +220,15 @@ void AnaPencere::cleanAll()
     else
         qDebug() << "output:touch" << process.readAll();
 
-    QString str= "echo 01 > keys/serial";
-    process.start(str);                 // < işareti için QString::from ???????????????
-    
+  //  QString str= "echo 01 > keys/serial";
+    process.start("touch keys/serial");                 // < işareti için QString::from ???????????????
+
     if (!process.waitForFinished())
         qDebug() << "failed: echo" << process.errorString();
     else
         qDebug() << "output:echo " << process.readAll();
+
+    writeContent(getOpenVPNPath()+"/keys/serial","01");
 
     process.start("touch "+getOpenVPNPath()+"/keys/openssl.cnf ");
     
@@ -233,9 +237,9 @@ void AnaPencere::cleanAll()
     else
         qDebug() << "output:touch openssl" << process.readAll();
 
-    setOpenVPNPath(getOpenVPNPath() + "/keys");
-
     orderOpenSSLCNF();
+
+    setOpenVPNPath(getOpenVPNPath() + "/keys");
 }
 
 void  AnaPencere::slotBurn()
