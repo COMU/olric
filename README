@@ -1,0 +1,9 @@
+
+    OLRIC (OpenVPN LiveCd Creator)
+    
+    Enstitü çalışanlarının, yerel ağlarına kararlı ve güvenli erişim sağlamaları için calışan cd üretir.
+
+    CD çalışma sistemi
+    Hem yerel ağa hem de internete ulaşabilen OpenVPN sunucusuna ve buradan rdesktop kullanarak otamatik olarak yerel masaüstüne bağlanır.
+
+    

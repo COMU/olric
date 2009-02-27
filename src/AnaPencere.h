@@ -10,21 +10,26 @@
 
 class AnaPencere:public QMainWindow, Ui::MainWindow
 {
-       Q_OBJECT
-       public:
+    Q_OBJECT
+    
+private :
+    bool server_exist;
+    
+public:
+    AnaPencere();   
 
-             AnaPencere();
+private:
+    bool lineControl();
+    bool whoIAm();    
+    void WriteRoute();
+    void cleanAll();
+    void orderOpenSSLCNF();
+    void buildCertificateAuthority();
+    void buildDHParam();
+    void buildKeyServer();
+    void burn();
 
-       private :
-
-             bool line_kontrol();
-             bool whoiam();
-             void OpensslOrder();
-             void BuildServerKey();
-             void WriteRoute();
-             void burn();
-             void temizle();
-
-       public slots:
-             void slotburn();
+public slots:
+    void slotBurn();
+    void slotCleanClientUI();
 };

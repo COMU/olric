@@ -28,122 +28,226 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="pushButton_Burn">
+    <item row="1" column="2">
+     <widget class="QPushButton" name="ButtonBurn">
       <property name="text">
        <string>Burn</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="ButtonNewClient">
+      <property name="text">
+       <string>New Client</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>532</width>
+        <height>368</height>
+       </size>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>&amp;Server</string>
+        <string>&amp;Authorization</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Server Ip</string>
-          </property>
-         </widget>
+        <item row="9" column="1">
+         <widget class="QLineEdit" name="Key_email"/>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="ServerIp"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Country Name(2 letter code)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="Key_Country"/>
-        </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="Key_Org"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="Key_Province"/>
+         <widget class="QLineEdit" name="Key_country"/>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>State or Province Name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
          <widget class="QLabel" name="label_11">
           <property name="text">
            <string>Locality Name</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="Key_City"/>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Organization Name</string>
-          </property>
-         </widget>
-        </item>
         <item row="8" column="0">
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Organizational Unit Name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLineEdit" name="Key_UnitName"/>
-        </item>
-        <item row="9" column="0">
          <widget class="QLabel" name="label_14">
           <property name="text">
            <string>Common Name</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
-         <widget class="QLineEdit" name="Key_CommonName"/>
-        </item>
-        <item row="10" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="label_15">
           <property name="text">
            <string>Email Adres</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="1">
-         <widget class="QLineEdit" name="Key_Email"/>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>Organizational Unit Name</string>
+          </property>
+         </widget>
         </item>
-        <item row="11" column="0">
-         <widget class="QLabel" name="label_16">
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="Key_organization"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Country Name(2 letter code)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLineEdit" name="Key_commonName"/>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="Key_unitName"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="Key_city"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Organization Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>State or Province Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="Key_province"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>&amp;Server</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="12" column="0">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="ServerIp"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Country Name(2 letter code)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="Server_country"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_21">
+          <property name="text">
+           <string>State or Province Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="Server_province"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Locality Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="Server_locality"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="label_23">
+          <property name="text">
+           <string>Organization Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="Server_organization"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_24">
+          <property name="text">
+           <string>Organizational Unit Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="Server_organization_unit"/>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLabel" name="label_25">
+          <property name="text">
+           <string>Common Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLineEdit" name="Server_commonName"/>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLabel" name="label_26">
+          <property name="text">
+           <string>Email Adres</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLineEdit" name="Server_email"/>
+        </item>
+        <item row="10" column="0">
+         <widget class="QLabel" name="label_27">
           <property name="text">
            <string>Challenge Passwd</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="1">
+        <item row="10" column="1">
          <widget class="QLineEdit" name="Server_passwd"/>
         </item>
-        <item row="12" column="0">
-         <widget class="QLabel" name="label_17">
+        <item row="11" column="0">
+         <widget class="QLabel" name="label_28">
           <property name="text">
            <string>Optional Company Name</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="1">
-         <widget class="QLineEdit" name="Server_CompanyName"/>
+        <item row="11" column="1">
+         <widget class="QLineEdit" name="Server_companyName"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_19">
+          <property name="text">
+           <string>Server ip</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -152,6 +256,16 @@
         <string>&amp;Client</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Passwd again</string>
+          </property>
+          <property name="buddy">
+           <cstring>client_2passwd</cstring>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
@@ -179,16 +293,6 @@
          <widget class="QLineEdit" name="client_passwd">
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Passwd again</string>
-          </property>
-          <property name="buddy">
-           <cstring>client_2passwd</cstring>
           </property>
          </widget>
         </item>
@@ -290,12 +394,22 @@
  </widget>
  <tabstops>
   <tabstop>tabWidget</tabstop>
+  <tabstop>Key_country</tabstop>
+  <tabstop>Key_province</tabstop>
+  <tabstop>Key_city</tabstop>
+  <tabstop>Key_organization</tabstop>
+  <tabstop>Key_unitName</tabstop>
+  <tabstop>Key_commonName</tabstop>
+  <tabstop>Key_email</tabstop>
   <tabstop>client_userName</tabstop>
   <tabstop>client_passwd</tabstop>
   <tabstop>client_2passwd</tabstop>
   <tabstop>client_machineName</tabstop>
   <tabstop>client_email</tabstop>
-  <tabstop>pushButton_Burn</tabstop>
+  <tabstop>client_UnitName</tabstop>
+  <tabstop>client_CompanyName</tabstop>
+  <tabstop>ButtonBurn</tabstop>
+  <tabstop>ButtonNewClient</tabstop>
  </tabstops>
  <resources/>
  <connections/>

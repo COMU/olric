@@ -6,174 +6,265 @@
 
 AnaPencere::AnaPencere():QMainWindow()
 {
-     setupUi(this);
-     connect(pushButton_Burn, SIGNAL(clicked()), this, SLOT(slotburn()));
+    setupUi(this);
+
+    connect(ButtonBurn, SIGNAL(clicked()), this, SLOT(slotBurn()));
+    connect(ButtonNewClient , SIGNAL(clicked()), this, SLOT(slotCleanClientUI()));
+
+    server_exist=false; 
 }
 
-
-
-
-bool  AnaPencere::whoiam()
+bool  AnaPencere::whoIAm()
 {
+    QStringList user_id = QProcess::systemEnvironment().filter("UID");
+    QString User_id = user_id.first().split("=").last();
 
-    QStringList userId = QProcess::systemEnvironment().filter("UID");
-    QString UserId = userId.first().split("=").last();
-   if(UserId=="1000") return true;
-   else return false;
-
-}
-
-
-void AnaPencere::temizle()
-{
-     client_userName->clear();
-     client_passwd->clear();
-     client_2passwd->clear();
-     client_machineName->clear();
-     client_email->clear();
-};
-
-bool AnaPencere::line_kontrol()
-{
-        if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty() ||client_2passwd->text().isEmpty() ||client_machineName->text().isEmpty() ||client_email->text().isEmpty()  )
-        {
-            QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
-            qDebug() << "More information";
-            return false;
-        }
-        else if(client_passwd->text()!=client_2passwd->text())
-         {
-            QMessageBox::critical(this, tr("Olric"), tr("Wrong password and password"));
-            return false;
-         }
+    if(User_id=="1000")
         return true;
+    else
+        return false;
+}
+
+
+
+bool AnaPencere::lineControl()
+{
+    if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty() ||client_2passwd->text().isEmpty() || client_machineName->text().isEmpty() ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
+    {
+        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
+        qDebug() << "More information";
+        return false;
+    }
+    else if(client_passwd->text()!=client_2passwd->text())
+    {
+        QMessageBox::critical(this, tr("Olric"), tr("Wrong password and password"));
+        return false;
+    }
+    return true;
 }
 
 
 
 void AnaPencere::burn()
 {
-      QString homePath= QDir::homePath();  //home/meltem
+    QStringList environment = QProcess::systemEnvironment();
 
-      QStringList env = QProcess::systemEnvironment();  //QProcess members
-            //environment = {"PATH=/usr/bin:/usr/local/bin", "USER=greg", "HOME=/home/greg"} 
-            //QStringList home= env.filter("home");
-            //QString hhome=env.join("     ");
-            //QMessageBox::information(this, QString::fromUtf8("system bilgisi\n"), hhome); 
+    QProcess process1;
+    QProcess process2;
+    process1.setStandardOutputProcess(&process2);
 
-      QProcess Pro1;
-      QProcess Pro2;
-      // Pro1.setProcessChannelMode(QProcess::MergedChannels);
-      // Pro2.setProcessChannelMode(QProcess::MergedChannels);
-       Pro1.setStandardOutputProcess(&Pro2);
+    QString str1("mkisofs -R -l -V \"OLRIC\" -v -allow-multidot "+getVpnTreePath()+"/vpn-tree/"); // /usr/bin/
+    process1.start(str1);
 
-      QString strpro1("/usr/bin/mkisofs -R -l -V \"OLRIC\" -v -allow-multidot " + homePath + "/Olric/vpn-tree/");
-        Pro1.start(strpro1);
-    //    if (!Pro1.waitForFinished())   qDebug() << "Make failed:" << Pro1.errorString();
-    //    else                           qDebug() << "Make output:" << Pro1.readAll();
+    QString str2="create_compressed_fs - 65536 > "+getVpnTreePath()+"/vpn-cd-tree/KNOPPIX/KNOPPIX";
+    process2.start(str2);
 
-      QString strpro2="create_compressed_fs - 65536 > "+homePath+"/Olric/vpn-cd-tree/KNOPPIX/KNOPPIX";
-        Pro2.start(strpro2);
-   //      if (!Pro2.waitForFinished())  qDebug() << "Make failed:" << Pro2.errorString();
-   //      else                          qDebug() << "Make output:" << Pro2.readAll();
+    QString str3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso vpn-cd-tree/";
+    QProcess process3;
 
-      QString strpro3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso "+homePath+"/Olric/vpn-cd-tree/";
-      QProcess pro;
-      pro.setProcessChannelMode(QProcess::MergedChannels);
-      pro.start(strpro3);
-       if (!pro.waitForFinished())   qDebug() << "Make failed1:" << pro.errorString();
-       else                          qDebug() << "Make output1:" << pro.readAll();
+    process3.setWorkingDirectory(getVpnTreePath());
+    process3.setProcessChannelMode(QProcess::MergedChannels);
+    process3.start(str3);
 
-      QProcess cdrecord;
-      cdrecord.setProcessChannelMode(QProcess::MergedChannels);
+    if (!process3.waitForFinished())
+        qDebug() << "Make failed1:" << process3.errorString();
+    else
+        qDebug() << "Make output1:" << process3.readAll();
 
-      cdrecord.start("cdrecord -v  -pad -dao  speed=4 "+homePath+"/Olric/olric/olric.iso");
-       if (!pro.waitForFinished())   qDebug() << "Make failed2:" << cdrecord.errorString();
-       else                          qDebug() << "Make output2:" << cdrecord.readAll();
+    str3="cdrecord -v  -pad -dao  speed=4 "+getVpnTreePath()+"/olric.iso";
+    process3.start(str3);
 
-    //   QByteArray result = pro.readAllStandardOutput();
-    //   if(result.size()>0 ) QMessageBox::information(this," ", (QString)result);
-
-      /* "cdrecord -v -isosize -pad -dao dev=ATAPI:0,1,0 speed=4 dosya_ismi.iso"
-         "mkisofs −R /master/tree | cdrecord −v fs=6m speed=2 dev=2,0 ‐" man dosyasında
-    */
+    if (!process3.waitForFinished())
+        qDebug() << "Make failed2:" << process3.errorString();
+    else
+        qDebug() << "Make output2:" << process3.readAll();
 }
 
-void AnaPencere::OpensslOrder()
+
+void AnaPencere::buildDHParam()
 {
-     QString KeyConfig="/home/meltem/openvpn-2.0.9/easy-rsa/openssl.cnf";
-     QString KeyDir="/home/meltem/openvpn-2.0.9/easy-rsa/keys";
+    QProcess process2;
+    process2.setWorkingDirectory(getOpenVPNPath());
+    process2.start( "openssl dhparam -out dh1024.pem 1024");
 
-     QString sslfiles= dosya_icerik_al("/home/meltem/openvpn-2.0.9/easy-rsa/openssl.cnf");
-     sslfiles.replace("$ENV::KEY_DIR" ,	KeyDir);
-     sslfiles.replace("$ENV::KEY_SIZE" ,"1024");
-     sslfiles.replace("$ENV::KEY_COUNTRY", Key_Country->text());
-     sslfiles.replace("$ENV::KEY_PROVINCE" , Key_Province->text());
-     sslfiles.replace("$ENV::KEY_CITY", Key_City->text());
-     sslfiles.replace("$ENV::KEY_ORG" ,	Key_Org->text());
-     sslfiles.replace("$ENV::KEY_EMAIL" ,Key_Email->text());
-
-     icerik_yaz("/home/meltem/openvpn-2.0.9/easy-rsa/openssl.cnf",sslfiles);
-
+    if (!process2.waitForFinished())   qDebug() << "failed:dh" << process2.errorString();
+    else   qDebug() << "output :dh" << process2.readAll();
 
 }
+void AnaPencere::buildCertificateAuthority()
+{
+    QByteArray byt_arry="\n\n\n\n";
+    byt_arry.append(Key_unitName->text());
+    byt_arry.append("\n");
+    byt_arry.append(Key_commonName->text());
+    byt_arry.append("\n\n");
 
- void AnaPencere::BuildServerKey()
- {
-      QString KeyConfig="/home/meltem/openvpn-2.0.9/easy-rsa/openssl.cnf";
-      QString KeyDir="/home/meltem/openvpn-2.0.9/easy-rsa/keys";
+    QString str="openssl req -days 3650 -nodes -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf";
 
-     QProcess process;
-     process.setWorkingDirectory(KeyDir);
-     QString str="openssl req -days 3650 -nodes -new -x509 -keyout ca.key -out ca.crt -config ../openssl.cnf";
-     QByteArray bytArr="\n\n\n\n";
-        bytArr.append(Key_UnitName->text()); bytArr.append("\n");
-        bytArr.append(Key_CommonName->text()); bytArr.append("\n\n");
-     process.start(str);
-     process.write(bytArr);
+    QProcess process1;
+    process1.setWorkingDirectory(getOpenVPNPath());
+    process1.start(str);
+    process1.write(byt_arry);
 
-       if (!process.waitForFinished())   qDebug() << "Make failed3:" << process.errorString();
-       else   qDebug() << "Make output3: ca olusturuldu." << process.readAll();
+    if (!process1.waitForFinished())
+        qDebug() << "failed: build ca" << process1.errorString();
+    else
+        qDebug() << "output: ca olusturuldu." << process1.readAll();
 
-      str="openssl req -days 3650 -nodes -new -keyout server.key -out server.csr -extensions server -config "+KeyConfig;
-      bytArr="\n\n\n\n"; bytArr.append(Key_UnitName->text()); bytArr.append("\n");
-         bytArr.append(Key_CommonName->text()); bytArr.append("\n\n");
-         bytArr.append(Server_passwd->text()); bytArr.append("\n");
-         bytArr.append(Server_CompanyName->text()); bytArr.append("\n");
-      process.start(str);
-      process.write(bytArr);
+    process1.start("chmod 0600 ca.key");
 
-       if (!process.waitForFinished())   qDebug() << "Make failed3:" << process.errorString();
-       else   qDebug() << "Ikısım server" << process.readAll();
-
-      str="openssl ca -days 3650 -out server.crt -in server.csr -extensions server -config "+ KeyConfig;
-      process.start(str);
-      process.write("y\ny\n");
-
-       if (!process.waitForFinished())   qDebug() << "Make failed3:" << process.errorString();
-       else   qDebug() << "II kısım Server.crt olusturuldu." << process.readAll();
+    if (!process1.waitForFinished())
+        qDebug() << "failed: chmod ca" << process1.errorString();
+    else
+        qDebug() << "Make output: chmod ca" << process1.readAll();
+}
 
 
- }
+
+void AnaPencere::buildKeyServer()
+{
+    QString str = "openssl req -days 3650 -nodes -new -keyout server.key -out server.csr -extensions server -config openssl.cnf";
+
+    QByteArray byte_arry ;
+    byte_arry.append(Server_country->text()+"\n");
+    byte_arry.append(Server_province->text()+"\n");
+    byte_arry.append(Server_locality->text()+"\n");
+    byte_arry.append(Server_organization->text()+"\n");
+    byte_arry.append(Server_organization_unit->text()+"\n");
+    byte_arry.append(Server_commonName->text()+"\n");
+    byte_arry.append(Server_email->text()+"\n");
+    byte_arry.append(Server_passwd->text()+"\n");
+    byte_arry.append(Server_companyName->text()+"\n");
+
+
+    QProcess process3;
+    process3.setWorkingDirectory(getOpenVPNPath());
+    process3.start(str);
+    process3.write(byte_arry);
+
+    if (!process3.waitForFinished())
+        qDebug() << "Failed :build server" << process3.errorString();
+    else
+        qDebug() << "Output : I server.crt " << process3.readAll();
+
+    str="openssl ca -days 3650 -out server.crt -in server.csr -extensions server -config openssl.cnf";
+    process3.start(str);
+    process3.write("y\ny\n");
+
+    if (!process3.waitForFinished())
+        qDebug() << "Failed :server" << process3.errorString();
+    else
+        qDebug() << "Output :Server.crt olusturuldu." << process3.readAll();
+
+    process3.start("chmod 0600 server.key");
+
+    if (!process3.waitForFinished())
+        qDebug() << "Make failed: chmod server" << process3.errorString();
+    else
+        qDebug() << "Make output: chmod server" << process3.readAll();
+}
 
 void AnaPencere::WriteRoute()
 {
-       QString inside="#!/bin/bash  \n# put other system startup command here \nroute add -host "+ServerIp->text()+" gw 10.10.10.1 dev tun0";
+    QString inside="#!/bin/bash  \n# put other system startup command here \nroute add -host "
+                   +ServerIp->text()
+                   +" gw 10.10.10.1 dev tun0";
 
-        //vpn-tree/opt/bootlocal.sh içine yaz
+    writeContent( getVpnTreePath()+"/vpn-tree/opt/bootlocal.sh" , inside);
+
 
 }
-void  AnaPencere::slotburn()
+
+void AnaPencere::orderOpenSSLCNF()
 {
-      OpensslOrder();
-      if(line_kontrol()) {
 
-          client client(client_userName->text(),client_passwd->text(), client_machineName->text(),client_email->text(), client_UnitName->text(), client_CompanyName->text());
-          client.run();
-                        burn()  ;
-      }
+    QString ssl_files= getFileContent(getOpenVPNPath()+"/openssl.cnf");
 
-       else         QMessageBox::critical(this, tr("USERID"), tr("you must be root??? "));
+    ssl_files.replace("$ENV::KEY_DIR" ,	getOpenVPNPath());
+    ssl_files.replace("$ENV::KEY_SIZE" ,"1024");
+    ssl_files.replace("$ENV::KEY_COUNTRY", Key_country->text());
+    ssl_files.replace("$ENV::KEY_PROVINCE" , Key_province->text());
+    ssl_files.replace("$ENV::KEY_CITY", Key_city->text());
+    ssl_files.replace("$ENV::KEY_ORG" ,	Key_organization->text());
+    ssl_files.replace("$ENV::KEY_EMAIL" ,Key_email->text());
+
+    writeContent(getOpenVPNPath()+"/keys/openssl.cnf",ssl_files);
+}
+
+void AnaPencere::cleanAll()
+{
+    QProcess process;    
+    process.start("mkdir " + getOpenVPNPath() + "/keys");
+
+    if (!process.waitForFinished())
+        qDebug() << "failed: mkdir" << process.errorString();
+    else
+        qDebug() << "output: mkdir" << process.readAll();
+
+
+    process.setWorkingDirectory(getOpenVPNPath());
+
+    process.start("chmod go-rwx keys/");
+    
+    if (!process.waitForFinished())
+        qDebug() << "failed: chmod" << process.errorString();
+    else
+        qDebug() << "output:chmod" << process.readAll();
+
+    process.start("touch keys/index.txt");
+    
+    if (!process.waitForFinished())
+        qDebug() << "failed:touch" << process.errorString();
+    else
+        qDebug() << "output:touch" << process.readAll();
+
+    QString str= "echo 01 > keys/serial";
+    process.start(str);                 // < işareti için QString::from ???????????????
+    
+    if (!process.waitForFinished())
+        qDebug() << "failed: echo" << process.errorString();
+    else
+        qDebug() << "output:echo " << process.readAll();
+
+    process.start("touch "+getOpenVPNPath()+"/keys/openssl.cnf ");
+    
+    if (!process.waitForFinished())
+        qDebug() << "failed: touchopenssl" << process.errorString();
+    else
+        qDebug() << "output:touch openssl" << process.readAll();
+
+    setOpenVPNPath(getOpenVPNPath() + "/keys");
+
+    orderOpenSSLCNF();
+}
+
+void  AnaPencere::slotBurn()
+{    
+    if(!server_exist){    //line boş ve dogru giris kontrolleri ekle???????????????
+        cleanAll();
+        buildCertificateAuthority();
+        WriteRoute();
+        buildKeyServer();
+        buildDHParam();
+        server_exist=true;
+    }
+
+    //if(line_kontrol()) {  //dogru giriş kontrollleri????????????
+
+    client client(client_userName->text(),client_passwd->text(), client_machineName->text(),client_email->text(), client_UnitName->text(), client_CompanyName->text(), ServerIp->text());
+    client.run();
+    burn()  ;
+    //}
 
 }
 
+void AnaPencere::slotCleanClientUI()
+{
+    client_userName->clear();
+    client_passwd->clear();
+    client_2passwd->clear();
+    client_machineName->clear();
+    client_email->clear();
+    client_CompanyName->clear();
+    client_UnitName->clear();
+}
