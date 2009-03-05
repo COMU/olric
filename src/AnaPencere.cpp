@@ -52,32 +52,38 @@ void AnaPencere::burn()
     QProcess process1;
     QProcess process2;
     process1.setStandardOutputProcess(&process2);
+    process1.waitForFinished(8000);
+    process2.waitForFinished(8000);
 
-    QString str1("mkisofs -R -l -V \"OLRIC\" -v -allow-multidot "+getVpnTreePath()+"/vpn-tree/"); // /usr/bin/
+
+    QString str1("mkisofs -R -l -V \"OLRIC\" -v -allow-multidot " + getVpnTreePath() + "/vpn-tree/"); // /usr/bin/
+
+    QString str2="/home/meltem/Desktop/cloop-2.628/create_compressed_fs - 65536 > "+getVpnTreePath()+"/vpn-cd-tree/KNOPPIX/KNOPPIX";
+
     process1.start(str1);
-
-    QString str2="create_compressed_fs - 65536 > "+getVpnTreePath()+"/vpn-cd-tree/KNOPPIX/KNOPPIX";
     process2.start(str2);
 
-    QString str3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso vpn-cd-tree/";
     QProcess process3;
-
     process3.setWorkingDirectory(getVpnTreePath());
     process3.setProcessChannelMode(QProcess::MergedChannels);
+    process3.waitForFinished(20000);
+
+    QString str3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso vpn-cd-tree/";
+
     process3.start(str3);
 
     if (!process3.waitForFinished())
-        qDebug() << "Make failed1:" << process3.errorString();
+        qDebug() << "failed1 :mkisofs" << process3.errorString();
     else
-        qDebug() << "Make output1:" << process3.readAll();
+        qDebug() << "output1: mkisofs" << process3.readAll();
 
-    str3="cdrecord -v  -pad -dao  speed=4 "+getVpnTreePath()+"/olric.iso";
+    str3="cdrecord -v -pad -dao "+getVpnTreePath()+"/olric.iso"; //speed=16
     process3.start(str3);
 
     if (!process3.waitForFinished())
-        qDebug() << "Make failed2:" << process3.errorString();
+        qDebug() << "failed2: cdrecord" << process3.errorString();
     else
-        qDebug() << "Make output2:" << process3.readAll();
+        qDebug() << "output2: cdrecord" << process3.readAll();
 }
 
 
@@ -134,7 +140,7 @@ void AnaPencere::buildKeyServer()
     byte_arry.append(Server_organization_unit->text()+"\n");
     byte_arry.append(Server_commonName->text()+"\n");
     byte_arry.append(Server_email->text()+"\n");
-    byte_arry.append(Server_passwd->text()+"\n");
+    byte_arry.append(Server_passwd->text()+"\n");       //parola 4 kaakterden fazla olmalı
     byte_arry.append(Server_companyName->text()+"\n");
 
 
