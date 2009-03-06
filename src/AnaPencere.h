@@ -23,7 +23,6 @@ private:
     bool whoIAm();    
     void WriteRoute();
     void cleanAll();
-    QString orderOpenSSLCNF();
     void buildCertificateAuthority();
     void buildDHParam();
     void buildKeyServer();

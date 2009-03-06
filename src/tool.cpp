@@ -123,18 +123,14 @@ bool setVariable()
             rdesktop_path =  nl.item(i).toElement().attribute( "value" );
         
         else if (nl.at(i).nodeName() == "vpn_tree_path")
-            vpn_tree_path= nl.item(i).toElement().attribute( "value" );
+            vpn_tree_path = nl.item(i).toElement().attribute( "value" );
        
-        else if (nl.at(i).nodeName() == "search_path_list")
+        else if (nl.at(i).nodeName() == "openvpn_path")
         {
-             search_path_list =  nl.item(i).toElement().attribute( "value" ).split(" | ");
-        }
-            
+             openvpn_path = nl.item(i).toElement().attribute( "value" );
+         }         
     }
-
-    setOpenVPNPath();
-
-    return true;
+   return true;
 }
 
 

@@ -28,8 +28,8 @@ using namespace std;
  QString getFileContent( QString file_name );
  bool writeContent(QString file_name,QString content);
 
- QString findOpenVPNPath();
- QFileInfoList findFilePath(QString Path,QString SearchFile );
+ //QString findOpenVPNPath();
+ //QFileInfoList findFilePath(QString Path,QString SearchFile );
 
  QString getOpenVPNPath();
  QString getVpnTreePath();

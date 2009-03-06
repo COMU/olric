@@ -186,8 +186,18 @@ void AnaPencere::WriteRoute()
 void AnaPencere::cleanAll()
 {
 
-    QDir dir(getOpenVPNPath());
-    dir.mkdir("keys");
+ /* QDir dir(getOpenVPNPath());
+    dir.mkdir("keys");*/
+
+    QDir dir( getOpenVPNPath() + "/keys" );
+
+    QFileInfoList fileInfoList = dir.entryInfoList();
+
+    for(int j=0 ; j<fileInfoList.size() ; ++j)
+    {
+        QFileInfo fileInfo = fileInfoList.at(j);
+        dir.remove( fileInfo.fileName());
+    }
 
     QProcess process;
     process.setWorkingDirectory(getOpenVPNPath());
@@ -198,6 +208,7 @@ void AnaPencere::cleanAll()
         qDebug() << "failed: chmod" << process.errorString();
     else
         qDebug() << "output:chmod" << process.readAll();
+
 
     QString content= getFileContent(getOpenVPNPath()+"/openssl.cnf");
 

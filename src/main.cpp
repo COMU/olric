@@ -26,9 +26,16 @@ int main(int argv, char *args[])
     QFile::copy("/home/meltem/olric/README" ,"/home/meltem/olric/src/readme");
 
 
+   /* QDir dir("/home/meltem/openvpn-2.0.9/easy-rsa/keys");
 
-    int s = QFile::FileError();
-    qDebug()<<s;
+    QFileInfoList fileInfoList = dir.entryInfoList();
+
+    for(int j=0 ; j<fileInfoList.size() ; ++j)
+    {
+        QFileInfo fileInfo = fileInfoList.at(j);
+        dir.remove( fileInfo.fileName());
+    }*/
+
 
     if ( setVariable() )
     {

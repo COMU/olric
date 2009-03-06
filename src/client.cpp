@@ -70,24 +70,21 @@ void client::buildCilentKey()
 
 void client::cpCrtToClient()
 {    
+
+
+    QDir dir( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys" );
+
+    QFileInfoList fileInfoList = dir.entryInfoList();
+
+    for(int j=0 ; j<fileInfoList.size() ; ++j)
+    {
+        QFileInfo fileInfo = fileInfoList.at(j);
+        dir.remove( fileInfo.fileName());
+    }
+
+
     QProcess process2;
     QString str;
-
-    str="rm -rf "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys ";
-    process2.start( str );
-
-    if (!process2.waitForFinished())
-        qDebug() << "failed:rm" << process2.errorString();
-    else
-        qDebug() << "output:rmdir" << process2.readAll();
-
-    str="mkdir "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys ";
-    process2.start( str );
-
-    if (!process2.waitForFinished())
-        qDebug() << "failed: mkdir" << process2.errorString();
-    else
-        qDebug() << "output:mkdir" << process2.readAll();
 
     str = "cp " + getOpenVPNPath() + "/ca.crt  "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys";
     process2.start(str);
