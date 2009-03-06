@@ -58,14 +58,18 @@ void client::buildCilentKey()
     else
         qDebug() << "Output : II  client.crt olusturuldu" << process1.readAll();
 
-    str="chmod 0600 " + user_name + ".key";
+  /*  str="chmod 0600 " + user_name + ".key";
 
     process1.start(str);
 
     if (!process1.waitForFinished())
         qDebug() << "Make failed: chmod client" << process1.errorString();
     else
-        qDebug() << "Make output: chmod client" << process1.readAll();
+        qDebug() << "Make output: chmod client" << process1.readAll();*/
+
+     QFile::setPermissions( getOpenVPNPath() + "/" +user_name +".key" , QFlag(0x0600));
+
+
 }
 
 void client::cpCrtToClient()
