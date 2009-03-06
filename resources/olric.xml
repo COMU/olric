@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-9"?>
+<variable>
+	<vpn_tree_path value="/tmp" />
+	<rdesktop_path value="/usr/bin/rdesktop"/>
+	<openvpn_path value="/home/meltem/openvpn-2.0.9/easy-rsa"/>
+</variable>	
