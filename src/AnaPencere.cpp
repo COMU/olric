@@ -183,33 +183,13 @@ void AnaPencere::WriteRoute()
 
 }
 
-void AnaPencere::orderOpenSSLCNF()
-{
-
-    QString ssl_files= getFileContent(getOpenVPNPath()+"/openssl.cnf");
-
-    ssl_files.replace("$ENV::KEY_DIR" ,	getOpenVPNPath()+"/keys");
-    ssl_files.replace("$ENV::KEY_SIZE" ,"1024");
-    ssl_files.replace("$ENV::KEY_COUNTRY", Key_country->text());
-    ssl_files.replace("$ENV::KEY_PROVINCE" , Key_province->text());
-    ssl_files.replace("$ENV::KEY_CITY", Key_city->text());
-    ssl_files.replace("$ENV::KEY_ORG" ,	Key_organization->text());
-    ssl_files.replace("$ENV::KEY_EMAIL" ,Key_email->text());
-
-    writeContent(getOpenVPNPath()+"/keys/openssl.cnf",ssl_files);
-}
-
 void AnaPencere::cleanAll()
 {
-    QProcess process;    
-    process.start("mkdir " + getOpenVPNPath() + "/keys");
 
-    if (!process.waitForFinished())
-        qDebug() << "failed: mkdir" << process.errorString();
-    else
-        qDebug() << "output: mkdir" << process.readAll();
+    QDir dir(getOpenVPNPath());
+    dir.mkdir("keys");
 
-
+    QProcess process;
     process.setWorkingDirectory(getOpenVPNPath());
 
     process.start("chmod go-rwx keys/");
@@ -219,38 +199,41 @@ void AnaPencere::cleanAll()
     else
         qDebug() << "output:chmod" << process.readAll();
 
-    process.start("touch keys/index.txt");
-    
-    if (!process.waitForFinished())
-        qDebug() << "failed:touch" << process.errorString();
-    else
-        qDebug() << "output:touch" << process.readAll();
+    QString content= getFileContent(getOpenVPNPath()+"/openssl.cnf");
 
-  //  QString str= "echo 01 > keys/serial";
-    process.start("touch keys/serial");                 // < işareti için QString::from ???????????????
-
-    if (!process.waitForFinished())
-        qDebug() << "failed: echo" << process.errorString();
-    else
-        qDebug() << "output:echo " << process.readAll();
-
-    writeContent(getOpenVPNPath()+"/keys/serial","01");
-
-    process.start("touch "+getOpenVPNPath()+"/keys/openssl.cnf ");
-    
-    if (!process.waitForFinished())
-        qDebug() << "failed: touchopenssl" << process.errorString();
-    else
-        qDebug() << "output:touch openssl" << process.readAll();
-
-    orderOpenSSLCNF();
+    content.replace("$ENV::KEY_DIR" ,	getOpenVPNPath()+"/keys");
+    content.replace("$ENV::KEY_SIZE" ,"1024");
+    content.replace("$ENV::KEY_COUNTRY", Key_country->text());
+    content.replace("$ENV::KEY_PROVINCE" , Key_province->text());
+    content.replace("$ENV::KEY_CITY", Key_city->text());
+    content.replace("$ENV::KEY_ORG" ,	Key_organization->text());
+    content.replace("$ENV::KEY_EMAIL" ,Key_email->text());
 
     setOpenVPNPath(getOpenVPNPath() + "/keys");
+
+    QFile opensslFile(getOpenVPNPath()+"/openssl.cnf");
+    opensslFile.open(QIODevice::WriteOnly);
+    QTextStream outt(&opensslFile);
+    outt << content;
+    opensslFile.close();
+
+    QFile index(getOpenVPNPath()+"/index.txt");
+    index.open(QIODevice::WriteOnly);
+    index.close();
+
+    QFile serial(getOpenVPNPath()+"/serial");
+    serial.open(QIODevice::WriteOnly);
+    QTextStream out(&serial);
+    out<<"01";
+    serial.close();
+
+
 }
 
 void  AnaPencere::slotBurn()
-{    
-    if(!server_exist){    //line boş ve dogru giris kontrolleri ekle???????????????
+{
+
+   if(!server_exist){    //line boş ve dogru giris kontrolleri ekle???????????????
         cleanAll();
         buildCertificateAuthority();
         WriteRoute();

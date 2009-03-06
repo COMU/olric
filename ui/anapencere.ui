@@ -51,7 +51,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -401,6 +401,16 @@
   <tabstop>Key_unitName</tabstop>
   <tabstop>Key_commonName</tabstop>
   <tabstop>Key_email</tabstop>
+  <tabstop>ServerIp</tabstop>
+  <tabstop>Server_country</tabstop>
+  <tabstop>Server_province</tabstop>
+  <tabstop>Server_locality</tabstop>
+  <tabstop>Server_organization</tabstop>
+  <tabstop>Server_organization_unit</tabstop>
+  <tabstop>Server_commonName</tabstop>
+  <tabstop>Server_email</tabstop>
+  <tabstop>Server_passwd</tabstop>
+  <tabstop>Server_companyName</tabstop>
   <tabstop>client_userName</tabstop>
   <tabstop>client_passwd</tabstop>
   <tabstop>client_2passwd</tabstop>
@@ -408,8 +418,8 @@
   <tabstop>client_email</tabstop>
   <tabstop>client_UnitName</tabstop>
   <tabstop>client_CompanyName</tabstop>
-  <tabstop>ButtonBurn</tabstop>
   <tabstop>ButtonNewClient</tabstop>
+  <tabstop>ButtonBurn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

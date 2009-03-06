@@ -17,6 +17,19 @@ int main(int argv, char *args[])
     app.installTranslator(&translator);
 
 
+    QFile file("/home/meltem/olric/serial");
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out<<"01";
+
+    QFile file1("/home/meltem/olric/src/readme");
+    QFile::copy("/home/meltem/olric/README" ,"/home/meltem/olric/src/readme");
+
+
+
+    int s = QFile::FileError();
+    qDebug()<<s;
+
     if ( setVariable() )
     {
         AnaPencere p;
