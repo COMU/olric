@@ -17,7 +17,7 @@ int main(int argv, char *args[])
     app.installTranslator(&translator);
 
 
-    QFile file("/home/meltem/olric/serial");
+   /* QFile file("/home/meltem/olric/serial");
     file.open(QIODevice::WriteOnly);
     QTextStream out(&file);
     out<<"01";
@@ -26,7 +26,7 @@ int main(int argv, char *args[])
     QFile::copy("/home/meltem/olric/README" ,"/home/meltem/olric/src/readme");
 
 
-   /* QDir dir("/home/meltem/openvpn-2.0.9/easy-rsa/keys");
+   QDir dir("/home/meltem/openvpn-2.0.9/easy-rsa/keys");
 
     QFileInfoList fileInfoList = dir.entryInfoList();
 

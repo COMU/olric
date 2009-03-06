@@ -62,12 +62,12 @@ void client::buildCilentKey()
     QFile::setPermissions( getOpenVPNPath() + "/" + user_name + ".key" , QFile::ReadUser);
     QFile::setPermissions( getOpenVPNPath() + "/" + user_name + ".key", QFile::WriteUser);
 
+    qDebug()<< getOpenVPNPath() + "/" + user_name + ".key"<<"QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ";
 
 }
 
 void client::cpCrtToClient()
 {    
-
 
     QDir dir( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys" );
 
@@ -79,34 +79,14 @@ void client::cpCrtToClient()
         dir.remove( fileInfo.fileName());
     }
 
+    QFile caCrt( getOpenVPNPath() + "/ca.crt");
+    caCrt.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/ca.crt");
 
-    QProcess process2;
-    QString str;
+    QFile userCrt( getOpenVPNPath() + "/" + user_name + ".crt");
+    userCrt.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/"+user_name+".crt");
 
-    str = "cp " + getOpenVPNPath() + "/ca.crt  "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys";
-    process2.start(str);
-
-    if (!process2.waitForFinished())
-        qDebug() << "failed:cpCA" << process2.errorString();
-    else
-        qDebug() << "output:cp" << process2.readAll();
-
-    str = "cp " + getOpenVPNPath() + "/" + user_name + ".crt  "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys";
-    process2.start(str);
-
-    if (!process2.waitForFinished())
-        qDebug() << "failed:cpclientCRT" << process2.errorString();
-    else
-        qDebug() << "output:cp" << process2.readAll();
-
-    str = "cp " + getOpenVPNPath() + "/" + user_name + ".key  "+ getVpnTreePath() +"/vpn-tree/etc/openvpn/keys";
-    process2.start(str);
-
-    if (!process2.waitForFinished())
-        qDebug() << "failed:cpclientKEY" << process2.errorString();
-    else
-        qDebug() << "output:cp" << process2.readAll();
-
+    QFile userKey( getOpenVPNPath() + "/"+ user_name + ".key");
+    userKey.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/"+user_name+".key");
 }
 
 void client::orderClientCnf()

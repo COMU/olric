@@ -91,7 +91,7 @@ void AnaPencere::buildDHParam()
 {
     QProcess process2;
     process2.setWorkingDirectory(getOpenVPNPath());
-    process2.waitForFinished(5000);
+    process2.waitForFinished(10000);
     process2.start( "openssl dhparam -out dh1024.pem 1024");
 
     if (!process2.waitForFinished())   qDebug() << "failed:dh" << process2.errorString();
