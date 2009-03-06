@@ -44,7 +44,8 @@ QFileInfoList findFilePath(QString Path,QString SearchFile )
     return list;
 }
 
-/*QString findOpenVPNPath()
+
+QString findOpenVPNPath()
 {
     QStringList pathList( search_path_list );
     pathList << QDir::homePath() ;     // homepath  atama???????
@@ -91,7 +92,7 @@ void setOpenVPNPath()
             qDebug() << "Output : keys silindi." << process.readAll();
     }
 }
-*/
+
 
 void setOpenVPNPath( QString path)
 {

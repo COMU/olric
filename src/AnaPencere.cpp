@@ -91,7 +91,7 @@ void AnaPencere::buildDHParam()
 {
     QProcess process2;
     process2.setWorkingDirectory(getOpenVPNPath());
-    process2.waitForFinished(10000);
+    process2.waitForFinished(5000);
     process2.start( "openssl dhparam -out dh1024.pem 1024");
 
     if (!process2.waitForFinished())   qDebug() << "failed:dh" << process2.errorString();
@@ -118,9 +118,12 @@ void AnaPencere::buildCertificateAuthority()
     else
         qDebug() << "output: ca olusturuldu." << process1.readAll();
 
-    QFile::setPermissions( getOpenVPNPath() + "/ca.key" , QFile::ReadUser);
-    QFile::setPermissions( getOpenVPNPath() + "/ca.key" , QFile::WriteUser);
+    process1.start("chmod 0600 ca.key");
 
+    if (!process1.waitForFinished())
+        qDebug() << "failed: chmod ca" << process1.errorString();
+    else
+        qDebug() << "Make output: chmod ca" << process1.readAll();
 }
 
 
@@ -161,9 +164,12 @@ void AnaPencere::buildKeyServer()
     else
         qDebug() << "Output :Server.crt olusturuldu." << process3.readAll();
 
-    QFile::setPermissions( getOpenVPNPath() + "/server.key" , QFile::ReadUser);
-    QFile::setPermissions( getOpenVPNPath() + "/server.key" , QFile::WriteUser);
+    process3.start("chmod 0600 server.key");
 
+    if (!process3.waitForFinished())
+        qDebug() << "Make failed: chmod server" << process3.errorString();
+    else
+        qDebug() << "Make output: chmod server" << process3.readAll();
 }
 
 void AnaPencere::WriteRoute()
