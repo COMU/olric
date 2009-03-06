@@ -26,25 +26,6 @@ bool  AnaPencere::whoIAm()
 }
 
 
-
-bool AnaPencere::lineControl()
-{
-    if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty() ||client_2passwd->text().isEmpty() || client_machineName->text().isEmpty() ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
-    {
-        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
-        qDebug() << "More information";
-        return false;
-    }
-    else if(client_passwd->text()!=client_2passwd->text())
-    {
-        QMessageBox::critical(this, tr("Olric"), tr("Wrong password and password"));
-        return false;
-    }
-    return true;
-}
-
-
-
 void AnaPencere::burn()
 {
     QStringList environment = QProcess::systemEnvironment();
@@ -118,15 +99,7 @@ void AnaPencere::buildCertificateAuthority()
     else
         qDebug() << "output: ca olusturuldu." << process1.readAll();
 
-  /*  process1.start("chmod 0600 ca.key");
-
-    if (!process1.waitForFinished())
-        qDebug() << "failed: chmod ca" << process1.errorString();
-    else
-        qDebug() << "Make output: chmod ca" << process1.readAll();*/
-
-   // QFile file(getOpenVPNPath() + "/ca.key");
-    QFile::setPermissions( getOpenVPNPath() + "/ca.key" ,QFlag(0x0600));
+     QFile::setPermissions( getOpenVPNPath() + "/ca.key" ,QFlag(0x0600));
 
 }
 
@@ -168,14 +141,7 @@ void AnaPencere::buildKeyServer()
     else
         qDebug() << "Output :Server.crt olusturuldu." << process3.readAll();
 
-/*    process3.start("chmod 0600 server.key");
-
-    if (!process3.waitForFinished())
-        qDebug() << "Make failed: chmod server" << process3.errorString();
-    else
-        qDebug() << "Make output: chmod server" << process3.readAll();*/
-
-      QFile::setPermissions( getOpenVPNPath() + "/server.key" ,QFlag(0x0600));
+    QFile::setPermissions( getOpenVPNPath() + "/server.key" ,QFlag(0x0600));
 
 }
 
@@ -192,10 +158,7 @@ void AnaPencere::WriteRoute()
 
 void AnaPencere::cleanAll()
 {
-
- /* QDir dir(getOpenVPNPath());
-    dir.mkdir("keys");*/
-
+   
     QDir dir( getOpenVPNPath() + "/keys" );
 
     QFileInfoList fileInfoList = dir.entryInfoList();
@@ -269,11 +232,28 @@ void  AnaPencere::slotBurn()
 
 }
 
+
+bool AnaPencere::clientControl()
+{
+      if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty()  || client_machineName->text().isEmpty() ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
+    {
+        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
+        qDebug() << "More information";
+        return false;
+    }
+ 
+}
+
+bool AnaPencere::serverControl()
+{
+
+}
+
+
 void AnaPencere::slotCleanClientUI()
 {
     client_userName->clear();
     client_passwd->clear();
-    client_2passwd->clear();
     client_machineName->clear();
     client_email->clear();
     client_CompanyName->clear();

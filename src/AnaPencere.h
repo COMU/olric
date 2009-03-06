@@ -19,7 +19,8 @@ public:
     AnaPencere();   
 
 private:
-    bool lineControl();
+    bool serverControl();
+    bool clientControl();
     bool whoIAm();    
     void WriteRoute();
     void cleanAll();
