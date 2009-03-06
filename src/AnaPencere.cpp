@@ -118,12 +118,9 @@ void AnaPencere::buildCertificateAuthority()
     else
         qDebug() << "output: ca olusturuldu." << process1.readAll();
 
-    process1.start("chmod 0600 ca.key");
+    QFile::setPermissions( getOpenVPNPath() + "/ca.key" , QFile::ReadUser);
+    QFile::setPermissions( getOpenVPNPath() + "/ca.key" , QFile::WriteUser);
 
-    if (!process1.waitForFinished())
-        qDebug() << "failed: chmod ca" << process1.errorString();
-    else
-        qDebug() << "Make output: chmod ca" << process1.readAll();
 }
 
 
@@ -164,12 +161,9 @@ void AnaPencere::buildKeyServer()
     else
         qDebug() << "Output :Server.crt olusturuldu." << process3.readAll();
 
-    process3.start("chmod 0600 server.key");
+    QFile::setPermissions( getOpenVPNPath() + "/server.key" , QFile::ReadUser);
+    QFile::setPermissions( getOpenVPNPath() + "/server.key" , QFile::WriteUser);
 
-    if (!process3.waitForFinished())
-        qDebug() << "Make failed: chmod server" << process3.errorString();
-    else
-        qDebug() << "Make output: chmod server" << process3.readAll();
 }
 
 void AnaPencere::WriteRoute()

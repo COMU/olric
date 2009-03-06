@@ -26,3 +26,5 @@ RCC_DIR = build
 
 
 QT           += xml
+CONFIG += console
+

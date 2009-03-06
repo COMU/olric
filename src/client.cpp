@@ -26,6 +26,7 @@ void client::rdesktop()
 
 void client::buildCilentKey()
 {    
+
     QByteArray byt_arry="\n\n\n\n";
     byt_arry.append(unit_name);
     byt_arry.append("\n");
@@ -58,14 +59,10 @@ void client::buildCilentKey()
     else
         qDebug() << "Output : II  client.crt olusturuldu" << process1.readAll();
 
-    str="chmod 0600 " + user_name + ".key";
+    QFile::setPermissions( getOpenVPNPath() + "/" + user_name + ".key" , QFile::ReadUser);
+    QFile::setPermissions( getOpenVPNPath() + "/" + user_name + ".key", QFile::WriteUser);
 
-    process1.start(str);
 
-    if (!process1.waitForFinished())
-        qDebug() << "Make failed: chmod client" << process1.errorString();
-    else
-        qDebug() << "Make output: chmod client" << process1.readAll();
 }
 
 void client::cpCrtToClient()
