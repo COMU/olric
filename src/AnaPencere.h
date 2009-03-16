@@ -14,6 +14,8 @@ class AnaPencere:public QMainWindow, Ui::MainWindow
     
 private :
     bool server_exist;
+    QRegExp rx_Email;
+    QRegExp rx_ipv4;
     
 public:
     AnaPencere();   

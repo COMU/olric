@@ -15,33 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>262</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="2">
-     <widget class="QPushButton" name="ButtonBurn">
-      <property name="text">
-       <string>Burn</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="ButtonNewClient">
-      <property name="text">
-       <string>New Client</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="minimumSize">
@@ -51,7 +24,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -329,6 +302,33 @@
       </widget>
      </widget>
     </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>359</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="ButtonNewClient">
+      <property name="text">
+       <string>New Client</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="ButtonBurn">
+      <property name="text">
+       <string>Burn</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -366,7 +366,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>Key_country</tabstop>
   <tabstop>Key_province</tabstop>
   <tabstop>Key_city</tabstop>
@@ -389,8 +388,6 @@
   <tabstop>client_email</tabstop>
   <tabstop>client_UnitName</tabstop>
   <tabstop>client_CompanyName</tabstop>
-  <tabstop>ButtonNewClient</tabstop>
-  <tabstop>ButtonBurn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -11,7 +11,9 @@ AnaPencere::AnaPencere():QMainWindow()
     connect(ButtonBurn, SIGNAL(clicked()), this, SLOT(slotBurn()));
     connect(ButtonNewClient , SIGNAL(clicked()), this, SLOT(slotCleanClientUI()));
 
-    server_exist=false; 
+    server_exist=false;
+    rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
+    rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
 }
 
 bool  AnaPencere::whoIAm()
@@ -159,14 +161,20 @@ void AnaPencere::WriteRoute()
 void AnaPencere::cleanAll()
 {
    
-    QDir dir( getOpenVPNPath() + "/keys" );
+    QDir keyDir( getOpenVPNPath() + "/keys" );
 
-    QFileInfoList fileInfoList = dir.entryInfoList();
+    if(!keyDir.exists())
+    {
+        QDir d(getOpenVPNPath());
+        d.mkdir("keys");
+    }
+
+    QFileInfoList fileInfoList = keyDir.entryInfoList();
 
     for(int j=0 ; j<fileInfoList.size() ; ++j)
     {
         QFileInfo fileInfo = fileInfoList.at(j);
-        dir.remove( fileInfo.fileName());
+        keyDir.remove( fileInfo.fileName());
     }
 
     QProcess process;
@@ -214,17 +222,18 @@ void AnaPencere::cleanAll()
 void  AnaPencere::slotBurn()
 {
 
-   if(!server_exist){    //line boş ve dogru giris kontrolleri ekle???????????????
+   //if(!server_exist && serverControl() )
+   //{
         cleanAll();
         buildCertificateAuthority();
         WriteRoute();
         buildKeyServer();
         buildDHParam();
         server_exist=true;
-    }
+   // }
 
-    //if(line_kontrol()) {  //dogru giriş kontrollleri????????????
-
+  //  if( clientControl() )
+    //{
     client client(client_userName->text(),client_passwd->text(), client_machineName->text(),client_email->text(), client_UnitName->text(), client_CompanyName->text(), ServerIp->text());
     client.run();
     burn()  ;
@@ -235,18 +244,70 @@ void  AnaPencere::slotBurn()
 
 bool AnaPencere::clientControl()
 {
-      if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty()  || client_machineName->text().isEmpty() ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
+    if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty()  || client_machineName->text().isEmpty()
+        ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
     {
         QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
-        qDebug() << "More information";
         return false;
     }
- 
+
+    if(!rx_ipv4.exactMatch( client_machineName->text() ) )
+    {
+        QMessageBox::critical(this, tr("False Client Ip"), tr("Please check field"));
+        return false;
+    }
+
+    if(!rx_Email.exactMatch( client_email->text() ) )
+    {
+        QMessageBox::critical(this, tr("False E-Mail"), tr("Please check field"));
+        return false;
+    }
+
+    if( client_passwd->text().length() < 5 )
+    {
+        QMessageBox::critical(this, tr("False passwd"), tr("passwd must be minimum five chracters"));
+        return false;
+    }
+    return true;
 }
 
 bool AnaPencere::serverControl()
 {
+    if (  Server_commonName->text().isEmpty() || Server_companyName->text().isEmpty()  || Server_country->text().isEmpty() ||
+          Server_email->text().isEmpty() || Server_locality->text().isEmpty() || Server_locality->text().isEmpty() ||
+          Server_organization->text().isEmpty() || Server_organization_unit->text().isEmpty() || Server_passwd->text().isEmpty() ||
+          Server_province->text().isEmpty() )
+    {
+        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
+        return false;
+    }
 
+    if( Key_city->text().isEmpty() || Key_commonName->text().isEmpty() || Key_country->text().isEmpty() ||
+        Key_email->text().isEmpty() || Key_organization->text().isEmpty() || Key_province->text().isEmpty() ||
+        Key_unitName->text().isEmpty() )
+    {
+        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
+        return false;
+    }
+
+    if( !rx_ipv4.exactMatch( ServerIp->text() ) )
+    {
+        QMessageBox::critical(this, tr("False Server Ip"), tr("Please check field"));
+        return false;
+    }
+
+    if( !rx_Email.exactMatch( Server_email->text() ) || !rx_Email.exactMatch( Key_email->text() ) )
+    {
+        QMessageBox::critical(this, tr("False E-Mail address"), tr("Please check field"));
+        return false;
+    }
+
+    if( Server_passwd->text().length() < 5  && Server_country->text().length() == 2 && Key_country->text().length() == 2 )
+    {
+        QMessageBox::critical(this, tr("False passwd"), tr("passwd must be minimum five chracters"));
+        return false;
+    }
+    return true;
 }
 
 

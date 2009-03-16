@@ -25,6 +25,7 @@ UI_DIR = build
 RCC_DIR = build
 
 
-QT           += xml
+QT           += network\
+                xml
 CONFIG += console
 
