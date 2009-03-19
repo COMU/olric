@@ -8,6 +8,9 @@ AnaPencere::AnaPencere():QMainWindow()
 {
     setupUi(this);
 
+    connect(actionAbout_olric, SIGNAL(activated()), this, SLOT(aboutOlric()));
+    connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
+
     connect(ButtonBurn, SIGNAL(clicked()), this, SLOT(slotBurn()));
     connect(ButtonNewClient , SIGNAL(clicked()), this, SLOT(slotCleanClientUI()));
 
@@ -102,10 +105,7 @@ void AnaPencere::buildCertificateAuthority()
         qDebug() << "output: ca olusturuldu." << process1.readAll();
 
      QFile::setPermissions( getOpenVPNPath() + "/ca.key" ,QFlag(0x0600));
-
 }
-
-
 
 void AnaPencere::buildKeyServer()
 {
@@ -319,4 +319,20 @@ void AnaPencere::slotCleanClientUI()
     client_email->clear();
     client_CompanyName->clear();
     client_UnitName->clear();
+}
+
+
+void AnaPencere::aboutQt()
+{
+    QMessageBox::aboutQt(this);
+}
+
+
+void AnaPencere::aboutOlric()
+{
+   // QString aboutText = QString(tr("   OLRIC \n  Olric burn Cds that users at the Institution where I currently work part-time have expressed a need for a robust and secure connection to the internal network   "));
+   // QMessageBox::information(this, tr("About Olric"), aboutText , tr("Show License") , "OK");
+   About *olric = new About(this);
+   olric->exec();
+
 }

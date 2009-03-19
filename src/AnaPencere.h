@@ -7,6 +7,7 @@
 #include "ui_anapencere.h"
 #include "client.h"
 #include "tool.h"
+#include "about.h"
 
 class AnaPencere:public QMainWindow, Ui::MainWindow
 {
@@ -32,6 +33,9 @@ private:
     void burn();
 
 public slots:
+    void aboutOlric();
+    void aboutQt();
     void slotBurn();
     void slotCleanClientUI();
+
 };

@@ -22,17 +22,17 @@ int main(int argv, char *args[])
 
 
 
-    QRegExp rx( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
+ /*QRegExp rx( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
 
-    if(!rx.exactMatch("melpe@comu.edu.tr")) qDebug()<<"1yanliş";
-    else qDebug()<<"1Dogru";
+   if(!rx.exactMatch("melpe@comu.edu.tr")) qDebug()<<"1yanliş";
+   else qDebug()<<"1Dogru";
 
- /*   QFile::setPermissions( "/home/meltem/Desktop/dene" , QFlag(0x0600));
+   QFile::setPermissions( "/home/meltem/Desktop/dene" , QFlag(0x0600));
 
-    QFile file("/home/meltem/olric/serial");
-    file.open(QIODevice::WriteOnly);
-    QTextStream out(&file);
-    out<<"01";
+   QFile file("/home/meltem/olric/serial");
+   file.open(QIODevice::WriteOnly);
+   QTextStream out(&file);
+   out<<"01";
 
     QFile file1("/home/meltem/olric/src/readme");
     QFile::copy("/home/meltem/olric/README" ,"/home/meltem/olric/src/readme");

@@ -345,13 +345,13 @@
      <string>about</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="actionOlric"/>
-    <addaction name="actionQt"/>
+    <addaction name="actionAbout_olric"/>
+    <addaction name="actionAbout_Qt"/>
    </widget>
    <addaction name="menuHakk_nda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOlric">
+  <action name="actionAbout_olric">
    <property name="text">
     <string>olric</string>
    </property>
@@ -359,7 +359,7 @@
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionQt">
+  <action name="actionAbout_Qt">
    <property name="text">
     <string>qt</string>
    </property>
