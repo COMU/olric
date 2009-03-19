@@ -2,5 +2,7 @@
    <qresource prefix="/">
          <file>olric_tr_TR.qm</file>
          <file>olric.xml</file>
+         <file>configure.png</file>
+         <file>exit.png</file>
    </qresource>
 </RCC>

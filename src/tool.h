@@ -23,6 +23,7 @@ using namespace std;
  static QString openvpn_path;
  static QString vpn_tree_path;
  static QString rdesktop_path;
+ static QString server_ip;
  static QStringList search_path_list;
 
  QString getFileContent( QString file_name );
@@ -34,10 +35,12 @@ using namespace std;
  QString getOpenVPNPath();
  QString getVpnTreePath();
  QString getRDesktopPath();
+ QString getServerIp();
  
  bool setVariable();
  void setOpenVPNPath();
  void setOpenVPNPath(QString);
+ void setServerIp(QString);
 
 
 #endif // TOOL_H

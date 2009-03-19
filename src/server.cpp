@@ -1,37 +1,21 @@
 #include <QtGui>
 #include <QDir>
-#include <stdlib.h>
-#include "AnaPencere.h"
 #include <QDebug>
+#include <stdlib.h>
 
-AnaPencere::AnaPencere():QMainWindow()
+#include "server.h"
+
+
+Server::Server(QWidget *parent):QDialog(parent)
 {
     setupUi(this);
 
-    connect(actionAbout_olric, SIGNAL(activated()), this, SLOT(aboutOlric()));
-    connect(actionAbout_Qt, SIGNAL(activated()), this, SLOT(aboutQt()));
-
-    connect(ButtonBurn, SIGNAL(clicked()), this, SLOT(slotBurn()));
-    connect(ButtonNewClient , SIGNAL(clicked()), this, SLOT(slotCleanClientUI()));
-
-    server_exist=false;
     rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
     rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
 }
 
-bool  AnaPencere::whoIAm()
-{
-    QStringList user_id = QProcess::systemEnvironment().filter("UID");
-    QString User_id = user_id.first().split("=").last();
 
-    if(User_id=="1000")
-        return true;
-    else
-        return false;
-}
-
-
-void AnaPencere::burn()
+void Server::burn()
 {
     QStringList environment = QProcess::systemEnvironment();
 
@@ -72,8 +56,7 @@ void AnaPencere::burn()
         qDebug() << "output2: cdrecord" << process3.readAll();
 }
 
-
-void AnaPencere::buildDHParam()
+void Server::buildDHParam()
 {
     QProcess process2;
     process2.setWorkingDirectory(getOpenVPNPath());
@@ -84,7 +67,8 @@ void AnaPencere::buildDHParam()
     else   qDebug() << "output :dh" << process2.readAll();
 
 }
-void AnaPencere::buildCertificateAuthority()
+
+void Server::buildCertificateAuthority()
 {
     QByteArray byt_arry="\n\n\n\n";
     byt_arry.append(Key_unitName->text());
@@ -107,7 +91,7 @@ void AnaPencere::buildCertificateAuthority()
      QFile::setPermissions( getOpenVPNPath() + "/ca.key" ,QFlag(0x0600));
 }
 
-void AnaPencere::buildKeyServer()
+void Server::buildKeyServer()
 {
     QString str = "openssl req -days 3650 -nodes -new -keyout server.key -out server.csr -extensions server -config openssl.cnf";
 
@@ -124,7 +108,7 @@ void AnaPencere::buildKeyServer()
 
 
     QProcess process3;
-    process3.setWorkingDirectory(getOpenVPNPath());   
+    process3.setWorkingDirectory(getOpenVPNPath());
     process3.waitForFinished(5000);
     process3.start(str);
     process3.write(byte_arry);
@@ -147,7 +131,7 @@ void AnaPencere::buildKeyServer()
 
 }
 
-void AnaPencere::WriteRoute()
+void Server::WriteRoute()
 {
     QString inside="#!/bin/bash  \n# put other system startup command here \nroute add -host "
                    +ServerIp->text()
@@ -158,9 +142,9 @@ void AnaPencere::WriteRoute()
 
 }
 
-void AnaPencere::cleanAll()
+void Server::cleanAll()
 {
-   
+
     QDir keyDir( getOpenVPNPath() + "/keys" );
 
     if(!keyDir.exists())
@@ -181,7 +165,7 @@ void AnaPencere::cleanAll()
     process.setWorkingDirectory(getOpenVPNPath());
 
     process.start("chmod go-rwx keys/");
-    
+
     if (!process.waitForFinished())
         qDebug() << "failed: chmod" << process.errorString();
     else
@@ -219,59 +203,22 @@ void AnaPencere::cleanAll()
 
 }
 
-void  AnaPencere::slotBurn()
+void  Server::slotBurn()
 {
 
-   //if(!server_exist && serverControl() )
+   //if( serverControl() )
    //{
         cleanAll();
         buildCertificateAuthority();
         WriteRoute();
         buildKeyServer();
         buildDHParam();
-        server_exist=true;
-   // }
+     // }
 
-  //  if( clientControl() )
-    //{
-    client client(client_userName->text(),client_passwd->text(), client_machineName->text(),client_email->text(), client_UnitName->text(), client_CompanyName->text(), ServerIp->text());
-    client.run();
-    burn()  ;
-    //}
 
 }
 
-
-bool AnaPencere::clientControl()
-{
-    if(client_userName->text().isEmpty() ||client_passwd->text().isEmpty()  || client_machineName->text().isEmpty()
-        ||client_email->text().isEmpty() || client_UnitName->text().isEmpty() || client_CompanyName->text().isEmpty())
-    {
-        QMessageBox::critical(this, tr("Missing Information"), tr("Please check fields"));
-        return false;
-    }
-
-    if(!rx_ipv4.exactMatch( client_machineName->text() ) )
-    {
-        QMessageBox::critical(this, tr("False Client Ip"), tr("Please check field"));
-        return false;
-    }
-
-    if(!rx_Email.exactMatch( client_email->text() ) )
-    {
-        QMessageBox::critical(this, tr("False E-Mail"), tr("Please check field"));
-        return false;
-    }
-
-    if( client_passwd->text().length() < 5 )
-    {
-        QMessageBox::critical(this, tr("False passwd"), tr("passwd must be minimum five chracters"));
-        return false;
-    }
-    return true;
-}
-
-bool AnaPencere::serverControl()
+bool Server::serverControl()
 {
     if (  Server_commonName->text().isEmpty() || Server_companyName->text().isEmpty()  || Server_country->text().isEmpty() ||
           Server_email->text().isEmpty() || Server_locality->text().isEmpty() || Server_locality->text().isEmpty() ||
@@ -311,28 +258,3 @@ bool AnaPencere::serverControl()
 }
 
 
-void AnaPencere::slotCleanClientUI()
-{
-    client_userName->clear();
-    client_passwd->clear();
-    client_machineName->clear();
-    client_email->clear();
-    client_CompanyName->clear();
-    client_UnitName->clear();
-}
-
-
-void AnaPencere::aboutQt()
-{
-    QMessageBox::aboutQt(this);
-}
-
-
-void AnaPencere::aboutOlric()
-{
-   // QString aboutText = QString(tr("   OLRIC \n  Olric burn Cds that users at the Institution where I currently work part-time have expressed a need for a robust and secure connection to the internal network   "));
-   // QMessageBox::information(this, tr("About Olric"), aboutText , tr("Show License") , "OK");
-   About *olric = new About(this);
-   olric->exec();
-
-}

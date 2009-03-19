@@ -94,10 +94,6 @@ void setOpenVPNPath()
 }
 
 
-void setOpenVPNPath( QString path)
-{
-    openvpn_path = path;
-}
 
 
 bool setVariable()
@@ -133,6 +129,16 @@ bool setVariable()
    return true;
 }
 
+void setOpenVPNPath( QString path)
+{
+    openvpn_path = path;
+}
+
+void setServerIp( QString ip)
+{
+    server_ip = ip;
+}
+
 
 QString getOpenVPNPath()
 {
@@ -151,5 +157,8 @@ QString  getRDesktopPath()
     return rdesktop_path;
 }
 
-
+QString getServerIp()
+{
+    return server_ip;
+}
 

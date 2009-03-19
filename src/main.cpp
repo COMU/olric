@@ -4,9 +4,10 @@
 #include <QDebug>
 #include <QProcess>
 #include <QRegExp>
-
-#include "AnaPencere.h"
 #include "QLocale"
+
+#include "mainwindow.h"
+
 
 
 int main(int argv, char *args[])
@@ -51,8 +52,8 @@ int main(int argv, char *args[])
 
     if ( setVariable() )
     {
-        AnaPencere p;
-        p.show();
+        Mainwindow main;
+        main.show();
         return app.exec();
     }
 
