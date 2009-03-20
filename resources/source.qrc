@@ -4,5 +4,8 @@
          <file>olric.xml</file>
          <file>configure.png</file>
          <file>exit.png</file>
+         <file>olricB.png</file>
+         <file>olricK.png</file>
+         <file>qt.png</file>
    </qresource>
 </RCC>

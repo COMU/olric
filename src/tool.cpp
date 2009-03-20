@@ -134,10 +134,26 @@ void setOpenVPNPath( QString path)
     openvpn_path = path;
 }
 
+void setVpnTreePath(QString str)
+{
+    vpn_tree_path = str ;
+}
+
+void setRDesktopPath(QString str)
+{
+    rdesktop_path = str ;
+}
+
 void setServerIp( QString ip)
 {
     server_ip = ip;
 }
+
+void setCertificaExist( bool sexist)
+{
+    certifica_exist = sexist ;
+}
+
 
 
 QString getOpenVPNPath()
@@ -145,14 +161,12 @@ QString getOpenVPNPath()
     return openvpn_path;
 }
 
-
 QString getVpnTreePath()
 {
     return vpn_tree_path;
 }
 
-
-QString  getRDesktopPath()
+QString getRDesktopPath()
 {
     return rdesktop_path;
 }
@@ -161,4 +175,10 @@ QString getServerIp()
 {
     return server_ip;
 }
+
+bool  getCertificaExist()
+{
+    return certifica_exist;
+}
+
 

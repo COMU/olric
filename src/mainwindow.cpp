@@ -172,6 +172,7 @@ void Mainwindow::slotBurn()
 {
     if( clientControl() )
     {
+
         rdesktop();
         buildCilentKey();
         orderClientCnf();

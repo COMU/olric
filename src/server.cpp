@@ -10,6 +10,9 @@ Server::Server(QWidget *parent):QDialog(parent)
 {
     setupUi(this);
 
+    connect(pushButton_save, SIGNAL(clicked()), this, SLOT(slotBurn()));
+    connect(pushButton_cancel, SIGNAL(clicked()), this, SLOT(close()));
+
     rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
     rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
 }
@@ -206,14 +209,18 @@ void Server::cleanAll()
 void  Server::slotBurn()
 {
 
-   //if( serverControl() )
-   //{
+     if( serverControl() )
+     {
+        QMessageBox::information( this , tr("Information") ,tr("Create the Server Certification ...") );
+
         cleanAll();
         buildCertificateAuthority();
         WriteRoute();
         buildKeyServer();
         buildDHParam();
-     // }
+        setCertificaExist( true );
+
+      }
 
 
 }

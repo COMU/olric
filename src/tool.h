@@ -24,7 +24,10 @@ using namespace std;
  static QString vpn_tree_path;
  static QString rdesktop_path;
  static QString server_ip;
+ static bool certifica_exist;
+
  static QStringList search_path_list;
+
 
  QString getFileContent( QString file_name );
  bool writeContent(QString file_name,QString content);
@@ -36,11 +39,16 @@ using namespace std;
  QString getVpnTreePath();
  QString getRDesktopPath();
  QString getServerIp();
+ bool getCertificaExist();
  
- bool setVariable();
- void setOpenVPNPath();
- void setOpenVPNPath(QString);
- void setServerIp(QString);
 
+ void setOpenVPNPath(QString);
+ void setVpnTreePath(QString);
+ void setRDesktopPath(QString);
+ void setServerIp(QString);
+ void setCertificaExist(bool);
+
+ void setOpenVPNPath();
+ bool setVariable();
 
 #endif // TOOL_H
