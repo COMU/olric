@@ -197,12 +197,6 @@ bool Server::serverControl()
         return false;
     }
 
-    if( !rx_ipv4.exactMatch( ServerIp->text() ) )
-    {
-        QMessageBox::critical(this, tr("False Server Ip"), tr("Please check field"));
-        return false;
-    }
-
     if( !rx_Email.exactMatch( Server_email->text() ) || !rx_Email.exactMatch( Key_email->text() ) )
     {
         QMessageBox::critical(this, tr("False E-Mail address"), tr("Please check field"));

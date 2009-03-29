@@ -44,7 +44,7 @@
    <item row="0" column="0" colspan="3">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabWidgetPage1">
       <attribute name="title">
@@ -129,103 +129,93 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
-        <widget class="QLabel" name="label_19">
-         <property name="text">
-          <string>Server ip</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="ServerIp"/>
-       </item>
-       <item row="1" column="0">
         <widget class="QLabel" name="label_20">
          <property name="text">
           <string>Country Name(2 letter code)</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="0" column="1">
         <widget class="QLineEdit" name="Server_country"/>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="0">
         <widget class="QLabel" name="label_21">
          <property name="text">
           <string>State or Province Name</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="1" column="1">
         <widget class="QLineEdit" name="Server_province"/>
        </item>
-       <item row="3" column="1">
+       <item row="2" column="1">
         <widget class="QLineEdit" name="Server_locality"/>
        </item>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_22">
          <property name="text">
           <string>Locality Name</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_23">
          <property name="text">
           <string>Organization Name</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="3" column="1">
         <widget class="QLineEdit" name="Server_organization"/>
        </item>
-       <item row="5" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="label_24">
          <property name="text">
           <string>Organizational Unit Name</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
+       <item row="4" column="1">
         <widget class="QLineEdit" name="Server_organization_unit"/>
        </item>
-       <item row="6" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="label_25">
          <property name="text">
           <string>Common Name</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="5" column="1">
         <widget class="QLineEdit" name="Server_commonName"/>
        </item>
-       <item row="7" column="0">
+       <item row="6" column="0">
         <widget class="QLabel" name="label_26">
          <property name="text">
           <string>Email Adres</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="6" column="1">
         <widget class="QLineEdit" name="Server_email"/>
        </item>
-       <item row="8" column="0">
+       <item row="7" column="0">
         <widget class="QLabel" name="label_27">
          <property name="text">
           <string>Challenge Passwd</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="1">
+       <item row="7" column="1">
         <widget class="QLineEdit" name="Server_passwd"/>
        </item>
-       <item row="9" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="label_28">
          <property name="text">
           <string>Optional Company Name</string>
          </property>
         </widget>
        </item>
-       <item row="9" column="1">
+       <item row="8" column="1">
         <widget class="QLineEdit" name="Server_companyName"/>
        </item>
       </layout>
@@ -305,7 +295,6 @@
   <tabstop>Key_unitName</tabstop>
   <tabstop>Key_commonName</tabstop>
   <tabstop>Key_email</tabstop>
-  <tabstop>ServerIp</tabstop>
   <tabstop>Server_country</tabstop>
   <tabstop>Server_province</tabstop>
   <tabstop>Server_locality</tabstop>

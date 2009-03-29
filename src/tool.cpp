@@ -124,9 +124,11 @@ bool setVariable()
             vpn_tree_path = nl.item(i).toElement().attribute( "value" );
        
         else if (nl.at(i).nodeName() == "openvpn_path")
-        {
+
             openvpn_path = nl.item(i).toElement().attribute( "value" )+"/easy-rsa";
-        }
+
+        else if (nl.at(i).nodeName()=="server_ip")
+            server_ip = nl.item(i).toElement().attribute( "value" );
     }
    return true;
 }

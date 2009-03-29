@@ -3,4 +3,5 @@
 	<vpn_tree_path value="/tmp" />
 	<rdesktop_path value="/usr/bin/rdesktop"/>
 	<openvpn_path value="/home/meltem/openvpn-2.0.9"/>
+	<server_ip value="193.255.97.19"/>
 </variable>	
