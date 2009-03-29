@@ -29,6 +29,8 @@ private:
     void cpCrtToClient();
     void orderClientCnf();
     bool clientControl();
+    void WriteRoute();
+    void burn();
 
 public slots:
     void aboutOlric();

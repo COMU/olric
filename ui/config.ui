@@ -14,22 +14,41 @@
    <string>Config Olric</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>378</width>
+       <height>23</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_save">
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pushButton_cancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="3">
-    <widget class="QToolBox" name="toolBox">
+    <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="page_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>523</width>
-        <height>333</height>
-       </rect>
-      </property>
-      <attribute name="label">
-       <string>&amp;Authorization </string>
+     <widget class="QWidget" name="tabWidgetPage1">
+      <attribute name="title">
+       <string>&amp;Authorization</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
@@ -104,16 +123,8 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>523</width>
-        <height>333</height>
-       </rect>
-      </property>
-      <attribute name="label">
+     <widget class="QWidget" name="tabWidgetPage2">
+      <attribute name="title">
        <string>&amp;Server</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
@@ -219,16 +230,8 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>523</width>
-        <height>333</height>
-       </rect>
-      </property>
-      <attribute name="label">
+     <widget class="QWidget" name="tabWidgetPage3">
+      <attribute name="title">
        <string>&amp;Absolute Path</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
@@ -240,27 +243,27 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="line_openvpn"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>CDRECORD Path</string>
+          <string>RDESKTOP Path</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="line_rdesktop"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>olric.iso  path??</string>
+          <string>İso path </string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="line_iso_path"/>
        </item>
        <item row="3" column="0">
         <spacer name="verticalSpacer">
@@ -292,35 +295,33 @@
      </widget>
     </widget>
    </item>
-   <item row="1" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>378</width>
-       <height>23</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="pushButton_save">
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="pushButton_cancel">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>Key_country</tabstop>
+  <tabstop>Key_province</tabstop>
+  <tabstop>Key_city</tabstop>
+  <tabstop>Key_organization</tabstop>
+  <tabstop>Key_unitName</tabstop>
+  <tabstop>Key_commonName</tabstop>
+  <tabstop>Key_email</tabstop>
+  <tabstop>ServerIp</tabstop>
+  <tabstop>Server_country</tabstop>
+  <tabstop>Server_province</tabstop>
+  <tabstop>Server_locality</tabstop>
+  <tabstop>Server_organization</tabstop>
+  <tabstop>Server_organization_unit</tabstop>
+  <tabstop>Server_commonName</tabstop>
+  <tabstop>Server_email</tabstop>
+  <tabstop>Server_passwd</tabstop>
+  <tabstop>Server_companyName</tabstop>
+  <tabstop>line_openvpn</tabstop>
+  <tabstop>line_rdesktop</tabstop>
+  <tabstop>line_iso_path</tabstop>
+  <tabstop>pushButton_save</tabstop>
+  <tabstop>pushButton_cancel</tabstop>
+  <tabstop>tabWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

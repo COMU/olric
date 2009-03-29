@@ -20,12 +20,11 @@ public:
 
 private:
     bool serverControl();
-    void WriteRoute();
     void cleanAll();
     void buildCertificateAuthority();
     void buildDHParam();
     void buildKeyServer();
-    void burn();
+    void setvariables();
 
 public slots:
     void slotBurn();

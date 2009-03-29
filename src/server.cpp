@@ -18,52 +18,11 @@ Server::Server(QWidget *parent):QDialog(parent)
 }
 
 
-void Server::burn()
-{
-    QStringList environment = QProcess::systemEnvironment();
-
-    QProcess process1;
-    QProcess process2;
-    process1.setStandardOutputProcess(&process2);
-    process1.waitForFinished(8000);
-    process2.waitForFinished(8000);
-
-
-    QString str1("mkisofs -R -l -V \"OLRIC\" -v -allow-multidot " + getVpnTreePath() + "/vpn-tree/"); // /usr/bin/
-
-    QString str2="/home/meltem/Desktop/cloop-2.628/create_compressed_fs - 65536 > "+getVpnTreePath()+"/vpn-cd-tree/KNOPPIX/KNOPPIX";
-
-    process1.start(str1);
-    process2.start(str2);
-
-    QProcess process3;
-    process3.setWorkingDirectory(getVpnTreePath());
-    process3.setProcessChannelMode(QProcess::MergedChannels);
-    process3.waitForFinished(20000);
-
-    QString str3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso vpn-cd-tree/";
-
-    process3.start(str3);
-
-    if (!process3.waitForFinished())
-        qDebug() << "failed1 :mkisofs" << process3.errorString();
-    else
-        qDebug() << "output1: mkisofs" << process3.readAll();
-
-    str3="cdrecord -v -pad -dao "+getVpnTreePath()+"/olric.iso"; //speed=16
-    process3.start(str3);
-
-    if (!process3.waitForFinished())
-        qDebug() << "failed2: cdrecord" << process3.errorString();
-    else
-        qDebug() << "output2: cdrecord" << process3.readAll();
-}
-
 void Server::buildDHParam()
 {
     QProcess process2;
-    process2.setWorkingDirectory(getOpenVPNPath());
-    process2.waitForFinished(10000);
+    process2.setWorkingDirectory(getOpenVPNPath()+"/keys");
+    process2.waitForFinished(25000);
     process2.start( "openssl dhparam -out dh1024.pem 1024");
 
     if (!process2.waitForFinished())   qDebug() << "failed:dh" << process2.errorString();
@@ -82,7 +41,7 @@ void Server::buildCertificateAuthority()
     QString str="openssl req -days 3650 -nodes -new -x509 -keyout ca.key -out ca.crt -config openssl.cnf";
 
     QProcess process1;
-    process1.setWorkingDirectory(getOpenVPNPath());
+    process1.setWorkingDirectory(getOpenVPNPath()+"/keys");
     process1.start(str);
     process1.write(byt_arry);
 
@@ -111,7 +70,7 @@ void Server::buildKeyServer()
 
 
     QProcess process3;
-    process3.setWorkingDirectory(getOpenVPNPath());
+    process3.setWorkingDirectory(getOpenVPNPath()+"/keys");
     process3.waitForFinished(5000);
     process3.start(str);
     process3.write(byte_arry);
@@ -130,20 +89,10 @@ void Server::buildKeyServer()
     else
         qDebug() << "Output :Server.crt olusturuldu." << process3.readAll();
 
-    QFile::setPermissions( getOpenVPNPath() + "/server.key" ,QFlag(0x0600));
+    QFile::setPermissions( getOpenVPNPath() + "/keys/server.key" ,QFlag(0x0600));
 
 }
 
-void Server::WriteRoute()
-{
-    QString inside="#!/bin/bash  \n# put other system startup command here \nroute add -host "
-                   +ServerIp->text()
-                   +" gw 10.10.10.1 dev tun0";
-
-    writeContent( getVpnTreePath()+"/vpn-tree/opt/bootlocal.sh" , inside);
-
-
-}
 
 void Server::cleanAll()
 {
@@ -185,19 +134,19 @@ void Server::cleanAll()
     content.replace("$ENV::KEY_ORG" ,	Key_organization->text());
     content.replace("$ENV::KEY_EMAIL" ,Key_email->text());
 
-    setOpenVPNPath(getOpenVPNPath() + "/keys");
+ //   setOpenVPNPath(getOpenVPNPath() + "/keys");
 
-    QFile opensslFile(getOpenVPNPath()+"/openssl.cnf");
+    QFile opensslFile(getOpenVPNPath()+"/keys/openssl.cnf");
     opensslFile.open(QIODevice::WriteOnly);
     QTextStream outt(&opensslFile);
     outt << content;
     opensslFile.close();
 
-    QFile index(getOpenVPNPath()+"/index.txt");
+    QFile index(getOpenVPNPath()+"/keys/index.txt");
     index.open(QIODevice::WriteOnly);
     index.close();
 
-    QFile serial(getOpenVPNPath()+"/serial");
+    QFile serial(getOpenVPNPath()+"/keys/serial");
     serial.open(QIODevice::WriteOnly);
     QTextStream out(&serial);
     out<<"01";
@@ -213,12 +162,16 @@ void  Server::slotBurn()
      {
         QMessageBox::information( this , tr("Information") ,tr("Create the Server Certification ...") );
 
+        pushButton_cancel->isHidden();
+
         cleanAll();
         buildCertificateAuthority();
-        WriteRoute();
         buildKeyServer();
         buildDHParam();
-        setCertificaExist( true );
+
+        setvariables();
+
+         this->close();
 
       }
 
@@ -265,3 +218,11 @@ bool Server::serverControl()
 }
 
 
+  void Server::setvariables()
+  {
+        setOpenVPNPath( line_openvpn->text());
+        setRDesktopPath( line_rdesktop->text());
+        setVpnTreePath(line_iso_path->text());
+        setServerIp( ServerIp->text());
+        setCertificaExist( true );
+  }

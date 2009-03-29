@@ -18,7 +18,7 @@ Mainwindow::Mainwindow():QMainWindow()
 
     rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
     rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
-    user_name = line_user_name->text();
+  
 }
 
 void Mainwindow::actionConfig()
@@ -27,7 +27,6 @@ void Mainwindow::actionConfig()
     olric->exec();
 
 }
-
 
 bool Mainwindow::clientControl()
 {
@@ -58,8 +57,20 @@ bool Mainwindow::clientControl()
     return true;
 }
 
+void Mainwindow::WriteRoute()
+{
+    QString inside="#!/bin/bash  \n# put other system startup command here \nroute add -host "
+                   + machine_name->text()
+                   +" gw 10.10.10.1 dev tun0";
+
+    writeContent( getVpnTreePath()+"/vpn-tree/opt/bootlocal.sh" , inside);
+
+}
+
 void Mainwindow::rdesktop()
 {
+    user_name = line_user_name->text();
+
     QString rdesktop = "/usr/bin/rdesktop -u " + user_name + "  " + machine_name->text() + " " ;
 
     QString content = getFileContent( getVpnTreePath()+"/vpn-tree/etc/skel/.xinitrc");
@@ -83,9 +94,11 @@ void Mainwindow::buildCilentKey()
     byt_arry.append("\n");
 
     QString str = "openssl req -days 3650 -nodes -new -keyout " + user_name + ".key -out " + user_name + ".csr -config openssl.cnf";
+    qDebug()<< user_name << line_user_name->text();
 
     QProcess process1;
-    process1.setWorkingDirectory(getOpenVPNPath());
+    process1.setWorkingDirectory(getOpenVPNPath()+"/keys");
+    qDebug() << getOpenVPNPath()+"/keys";
     process1.start(str);
     process1.write(byt_arry);
 
@@ -122,13 +135,13 @@ void Mainwindow::cpCrtToClient()
         dir.remove( fileInfo.fileName());
     }
 
-    QFile caCrt( getOpenVPNPath() + "/ca.crt");
+    QFile caCrt( getOpenVPNPath() + "/keys/ca.crt");
     caCrt.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/ca.crt");
 
-    QFile userCrt( getOpenVPNPath() + "/" + user_name + ".crt");
+    QFile userCrt( getOpenVPNPath() + "/keys/" + user_name + ".crt");
     userCrt.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/"+ user_name +".crt");
 
-    QFile userKey( getOpenVPNPath() + "/"+ user_name + ".key");
+    QFile userKey( getOpenVPNPath() + "/keys/"+ user_name + ".key");
     userKey.copy( getVpnTreePath() + "/vpn-tree/etc/openvpn/keys/"+ user_name +".key");
 
 }
@@ -168,14 +181,64 @@ void Mainwindow::aboutOlric()
 
 }
 
+
+void Mainwindow::burn()
+{
+    QStringList environment = QProcess::systemEnvironment();
+
+    QProcess process1;
+    QProcess process2;
+    process1.setStandardOutputProcess(&process2);
+    process1.waitForFinished(8000);
+    process2.waitForFinished(8000);
+
+
+    QString str1("mkisofs -R -l -V \"OLRIC\" -v -allow-multidot " + getVpnTreePath() + "/vpn-tree/"); // /usr/bin/
+
+    QString str2="/home/meltem/Desktop/cloop-2.628/create_compressed_fs - 65536 > "+getVpnTreePath()+"/vpn-cd-tree/KNOPPIX/KNOPPIX";
+
+    process1.start(str1);
+    process2.start(str2);
+
+    QProcess process3;
+    process3.setWorkingDirectory(getVpnTreePath());
+    process3.setProcessChannelMode(QProcess::MergedChannels);
+    process3.waitForFinished(20000);
+
+    QString str3="mkisofs -pad -l -r -J -V \"OLRIC\" -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat -hide-rr-moved -o  olric.iso vpn-cd-tree/";
+
+    process3.start(str3);
+
+    if (!process3.waitForFinished())
+        qDebug() << "failed1 :mkisofs" << process3.errorString();
+    else
+        qDebug() << "output1: mkisofs" << process3.readAll();
+
+    str3="cdrecord -v -pad -dao "+getVpnTreePath()+"/olric.iso"; //speed=16
+    process3.start(str3);
+
+    if (!process3.waitForFinished())
+        qDebug() << "failed2: cdrecord" << process3.errorString();
+    else
+        qDebug() << "output2: cdrecord" << process3.readAll();
+}
+
 void Mainwindow::slotBurn()
 {
     if( clientControl() )
     {
+        //if (!getCertificaExist()) QMessageBox::information(this, tr("About Olric"),  tr("you must config olric"));
+        //else{
 
-        rdesktop();
-        buildCilentKey();
-        orderClientCnf();
-        cpCrtToClient();
+            qDebug()<< getCertificaExist() << getOpenVPNPath() << getRDesktopPath() << getVpnTreePath() ;
+
+            rdesktop();
+            buildCilentKey();
+            orderClientCnf();
+            cpCrtToClient();
+
+            burn();
+        //}
     }
+
 }

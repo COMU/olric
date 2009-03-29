@@ -123,11 +123,12 @@ bool setVariable()
        
         else if (nl.at(i).nodeName() == "openvpn_path")
         {
-             openvpn_path = nl.item(i).toElement().attribute( "value" );
-         }         
+            openvpn_path = nl.item(i).toElement().attribute( "value" );
+        }
     }
    return true;
 }
+
 
 void setOpenVPNPath( QString path)
 {
