@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QProcess>
 #include <QRegExp>
+#include <QFileInfo>
 #include "QLocale"
 
 #include "mainwindow.h"
@@ -19,39 +20,18 @@ int main(int argv, char *args[])
     translator.load(QString(":/olric_")+locale);
     app.installTranslator(&translator);
 
-
-
-
-
- /*QRegExp rx( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
-
-   if(!rx.exactMatch("melpe@comu.edu.tr")) qDebug()<<"1yanliş";
-   else qDebug()<<"1Dogru";
-
-   QFile::setPermissions( "/home/meltem/Desktop/dene" , QFlag(0x0600));
-
-   QFile file("/home/meltem/olric/serial");
-   file.open(QIODevice::WriteOnly);
-   QTextStream out(&file);
-   out<<"01";
-
-    QFile file1("/home/meltem/olric/src/readme");
-    QFile::copy("/home/meltem/olric/README" ,"/home/meltem/olric/src/readme");
-
-
-    QDir dir("/home/meltem/openvpn-2.0.9/easy-rsa/keys");
-
-    QFileInfoList fileInfoList = dir.entryInfoList();
-
-    for(int j=0 ; j<fileInfoList.size() ; ++j)
-    {
-        QFileInfo fileInfo = fileInfoList.at(j);
-        dir.remove( fileInfo.fileName());
-    }*/
-
-
     if ( setVariable() )
     {
+
+        QFileInfoList fileInfoList1 = fileExist( getOpenVPNPath()+"/keys" , "server.crt" );
+        QFileInfoList fileInfoList2 = fileExist( getOpenVPNPath()+"/keys" , "ca.crt" );
+        QFileInfoList fileInfoList3 = fileExist( getOpenVPNPath()+"/keys" , "dh1024.pem" );
+        if( fileInfoList1.size() <= 0 || fileInfoList2.size() <= 0 || fileInfoList3.size() <= 0  )
+            setCertificaExist(false);
+        else
+            setCertificaExist(true);
+
+
         Mainwindow main;
         main.show();
         return app.exec();

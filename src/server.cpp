@@ -169,7 +169,7 @@ void  Server::slotBurn()
         buildKeyServer();
         buildDHParam();
 
-        setvariables();
+  //      writeVariables();
 
          this->close();
 
@@ -218,11 +218,20 @@ bool Server::serverControl()
 }
 
 
-  void Server::setvariables()
+  /*void Server::writeVariables()  // /home/meltem/openvpn-2.0.9/easy-rsa  /tmp /usr/bin/rdesktop
   {
+      QString inside = " <?xml version=\"1.0\" encoding=\"iso-8859-9\"?> \n <variable> \n <vpn_tree_path value=\""
+                       + line_iso_path->text()
+                       + "\"/> \n <rdesktop_path value=\""
+                       + line_rdesktop->text()
+                       +"\"/> \n <openvpn_path value=\""
+                       + line_openvpn->text()
+                       +"\"/> \n </variable>" ;
+
         setOpenVPNPath( line_openvpn->text());
         setRDesktopPath( line_rdesktop->text());
         setVpnTreePath(line_iso_path->text());
         setServerIp( ServerIp->text());
         setCertificaExist( true );
   }
+*/

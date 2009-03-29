@@ -31,7 +31,7 @@ bool writeContent(QString file_Name, QString content)
 }
 
 
-QFileInfoList findFilePath(QString Path,QString SearchFile )
+QFileInfoList fileExist(QString Path,QString SearchFile )
 {
     QDir dir(Path);
     QStringList filters;
@@ -45,7 +45,9 @@ QFileInfoList findFilePath(QString Path,QString SearchFile )
 }
 
 
-QString findOpenVPNPath()
+
+
+/*QString findOpenVPNPath()
 {
     QStringList pathList( search_path_list );
     pathList << QDir::homePath() ;     // homepath  atama???????
@@ -69,10 +71,10 @@ QString findOpenVPNPath()
         }
     }
     return " ";
-}
+}*/
 
 
-void setOpenVPNPath()
+/*void setOpenVPNPath()
 {
     QString temp_openvpn_path = findOpenVPNPath();
 
@@ -92,7 +94,7 @@ void setOpenVPNPath()
             qDebug() << "Output : keys silindi." << process.readAll();
     }
 }
-
+*/
 
 
 
@@ -123,7 +125,7 @@ bool setVariable()
        
         else if (nl.at(i).nodeName() == "openvpn_path")
         {
-            openvpn_path = nl.item(i).toElement().attribute( "value" );
+            openvpn_path = nl.item(i).toElement().attribute( "value" )+"/easy-rsa";
         }
     }
    return true;
@@ -135,17 +137,8 @@ void setOpenVPNPath( QString path)
     openvpn_path = path;
 }
 
-void setVpnTreePath(QString str)
-{
-    vpn_tree_path = str ;
-}
 
-void setRDesktopPath(QString str)
-{
-    rdesktop_path = str ;
-}
-
-void setServerIp( QString ip)
+void setServerIp( QString ip)        //???????????????ikincide caliştirmada  silinir.Dosya ya kayıt yap yada xml yaz..........
 {
     server_ip = ip;
 }

@@ -24,7 +24,7 @@ private:
     void buildCertificateAuthority();
     void buildDHParam();
     void buildKeyServer();
-    void setvariables();
+    void writeVariables();
 
 public slots:
     void slotBurn();

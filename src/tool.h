@@ -33,7 +33,7 @@ using namespace std;
  bool writeContent(QString file_name,QString content);
 
  //QString findOpenVPNPath();
- //QFileInfoList findFilePath(QString Path,QString SearchFile );
+ QFileInfoList fileExist(QString Path,QString SearchFile );
 
  QString getOpenVPNPath();
  QString getVpnTreePath();
@@ -48,7 +48,7 @@ using namespace std;
  void setServerIp(QString);
  void setCertificaExist(bool);
 
- void setOpenVPNPath();
+ //void setOpenVPNPath();
  bool setVariable();
 
 #endif // TOOL_H
