@@ -94,7 +94,7 @@ void Server::buildKeyServer()
 
 void Server::serverConf()
 {
-  /*  QDir openvpnDir( "/etc/openvpn" );
+    QDir openvpnDir( "/etc/openvpn" );
 
     if(!openvpnDir.exists())
     {
@@ -129,15 +129,15 @@ void Server::serverConf()
     dh1024Pem.copy( "/etc/openvpn/keys/dh1024.pem");
 
     QFile ipConfigFile("/etc/openvpn/ip-config");
-    serverFile.open(QIODevice::WriteOnly);
+    ipConfigFile.open(QIODevice::WriteOnly);
 
-    QString content = " #!/bin/bash  \nINTERFACE=$1; shift;  \nip link set ${INTERFACE} up \nip addr add 10.11.1.1 peer 10.11.1.2 dev ${INTERFACE} \nip route add 10.11.1.0/24 dev ${INTERFACE} \nip route add 194.27.158.0/24 dev ${INTERFACE}\necho 1 > /proc/sys/net/ipv4/ip_forward\n";
+    content = " #!/bin/bash  \nINTERFACE=$1; shift;  \nip link set ${INTERFACE} up \nip addr add 10.11.1.1 peer 10.11.1.2 dev ${INTERFACE} \nip route add 10.11.1.0/24 dev ${INTERFACE} \nip route add 194.27.158.0/24 dev ${INTERFACE}\necho 1 > /proc/sys/net/ipv4/ip_forward\n";
 
-    QTextStream outt(&serverFile);
-    outt << content;
-    serverFile.close();
+    QTextStream out(&ipConfigFile);
+    out << content;
+    ipConfigFile.close();
 
-*/
+
 }
 
 void Server::cleanAll()
@@ -218,6 +218,8 @@ void  Server::slotBurn()
         buildCertificateAuthority();
         buildKeyServer();
         buildDHParam();
+
+        serverConf();
 
         setCertificaExist(true);
 
