@@ -227,10 +227,11 @@ void Mainwindow::slotBurn()
 {
     if( clientControl() )
     {
-        if (!getCertificaExist()) QMessageBox::information(this, tr("About Olric"),  tr("you must    cert"));
+        qDebug()<< getCertificaExist() << getOpenVPNPath() << getRDesktopPath() << getVpnTreePath() ;
+        if (!getCertificaExist()) QMessageBox::information(this, tr("About Olric"),  tr("you must build server-"));
         else{
 
-            qDebug()<< getCertificaExist() << getOpenVPNPath() << getRDesktopPath() << getVpnTreePath() ;
+
 
             rdesktop();
             buildCilentKey();

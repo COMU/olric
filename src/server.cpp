@@ -13,7 +13,6 @@ Server::Server(QWidget *parent):QDialog(parent)
     connect(pushButton_save, SIGNAL(clicked()), this, SLOT(slotBurn()));
     connect(pushButton_cancel, SIGNAL(clicked()), this, SLOT(close()));
 
-    rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
     rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
 }
 
@@ -93,6 +92,53 @@ void Server::buildKeyServer()
 
 }
 
+void Server::serverConf()
+{
+  /*  QDir openvpnDir( "/etc/openvpn" );
+
+    if(!openvpnDir.exists())
+    {
+        QDir d("/etc");
+        d.mkdir("openvpn");
+    }
+
+    QFile serverFile("/etc/openvpn/server.conf");
+    serverFile.open(QIODevice::WriteOnly);
+
+    QString content = " server yapılandırma dosys içerigi";
+
+    QTextStream outt(&serverFile);
+    outt << content;
+    serverFile.close();
+
+    openvpnDir.mkdir("keys");
+
+    QFile caCrt( getOpenVPNPath() + "/keys/ca.crt");
+    caCrt.copy("/etc/openvpn/keys/ca.crt");
+
+    QFile serverCrt( getOpenVPNPath() + "/keys/server.crt");
+    serverCrt.copy("/etc/openvpn/keys/ca.crt");
+
+    QFile serverCsr( getOpenVPNPath() + "/keys/server.csr");
+    serverCsr.copy("/etc/openvpn/keys/server.csr");
+
+    QFile serverKey( getOpenVPNPath() + "/keys/server.key");
+    serverKey.copy( "/etc/openvpn/keys/server.key");
+
+    QFile dh1024Pem( getOpenVPNPath() + "/keys/dh1024.pem");
+    dh1024Pem.copy( "/etc/openvpn/keys/dh1024.pem");
+
+    QFile ipConfigFile("/etc/openvpn/ip-config");
+    serverFile.open(QIODevice::WriteOnly);
+
+    QString content = " #!/bin/bash  \nINTERFACE=$1; shift;  \nip link set ${INTERFACE} up \nip addr add 10.11.1.1 peer 10.11.1.2 dev ${INTERFACE} \nip route add 10.11.1.0/24 dev ${INTERFACE} \nip route add 194.27.158.0/24 dev ${INTERFACE}\necho 1 > /proc/sys/net/ipv4/ip_forward\n";
+
+    QTextStream outt(&serverFile);
+    outt << content;
+    serverFile.close();
+
+*/
+}
 
 void Server::cleanAll()
 {
@@ -160,22 +206,24 @@ void  Server::slotBurn()
 
      if( serverControl() )
      {
+
         QMessageBox::information( this , tr("Information") ,tr("Create the Server Certification ...") );
 
-        pushButton_cancel->isHidden();
+        pushButton_cancel->hide();
+
+        writeVariablesToXml();
+        setVariable();
 
         cleanAll();
         buildCertificateAuthority();
         buildKeyServer();
         buildDHParam();
 
-  //      writeVariables();
+        setCertificaExist(true);
 
-         this->close();
+        this->close();
 
       }
-
-
 }
 
 bool Server::serverControl()
@@ -212,20 +260,19 @@ bool Server::serverControl()
 }
 
 
-  /*void Server::writeVariables()  // /home/meltem/openvpn-2.0.9/easy-rsa  /tmp /usr/bin/rdesktop
+ void Server::writeVariablesToXml()  // /home/meltem/openvpn-2.0.9/easy-rsa  /tmp /usr/bin/rdesktop
   {
-      QString inside = " <?xml version=\"1.0\" encoding=\"iso-8859-9\"?> \n <variable> \n <vpn_tree_path value=\""
-                       + line_iso_path->text()
-                       + "\"/> \n <rdesktop_path value=\""
-                       + line_rdesktop->text()
-                       +"\"/> \n <openvpn_path value=\""
-                       + line_openvpn->text()
-                       +"\"/> \n </variable>" ;
+         QFile File(QString("/home/meltem/olric/resources/olric.xml"));
+         File.open(QIODevice::WriteOnly);
 
-        setOpenVPNPath( line_openvpn->text());
-        setRDesktopPath( line_rdesktop->text());
-        setVpnTreePath(line_iso_path->text());
-        setServerIp( ServerIp->text());
-        setCertificaExist( true );
-  }
-*/
+         QString content = "<?xml version=\"1.0\" encoding=\"iso-8859-9\"?>   \n<variable>    \n<vpn_tree_path value=\""
+                           + lineEdit_vpntree_path->text() + "\" />    \n<openvpn_path value=\""
+                           + lineEdit_openvpn_path->text() + "\" />    \n<server_ip value=\""
+                           + lineEdit_serverip->text()+ "\" />"
+                           + "\n</variable> "  ;
+
+         QTextStream outt(&File);
+         outt << content;
+         File.close();
+ }
+
