@@ -5,7 +5,5 @@
          <file>configure.png</file>
          <file>exit.png</file>
          <file>olricWelcome.png</file>
-         <file>olric.png</file>
-         <file>deneme</file>
    </qresource>
 </RCC>

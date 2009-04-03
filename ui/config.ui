@@ -288,6 +288,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>Key_country</tabstop>
   <tabstop>Key_province</tabstop>
   <tabstop>Key_city</tabstop>
@@ -295,6 +296,7 @@
   <tabstop>Key_unitName</tabstop>
   <tabstop>Key_commonName</tabstop>
   <tabstop>Key_email</tabstop>
+  <tabstop>lineEdit_serverip</tabstop>
   <tabstop>Server_country</tabstop>
   <tabstop>Server_province</tabstop>
   <tabstop>Server_locality</tabstop>
@@ -304,9 +306,10 @@
   <tabstop>Server_email</tabstop>
   <tabstop>Server_passwd</tabstop>
   <tabstop>Server_companyName</tabstop>
+  <tabstop>lineEdit_openvpn_path</tabstop>
+  <tabstop>lineEdit_vpntree_path</tabstop>
   <tabstop>pushButton_save</tabstop>
   <tabstop>pushButton_cancel</tabstop>
-  <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources/>
  <connections/>
