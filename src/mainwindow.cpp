@@ -154,6 +154,7 @@ void Mainwindow::orderClientCnf()  //iki odsya olusturuo ??????????????????????
                      + user_name + ".key \nns-cert-type server \ncomp-lzo \nverb 3 \nmute 20 \n#auth-retry interact";
 
     writeContent( getVpnTreePath() + "/vpn-tree/etc/openvpn/client.cnf",inside);
+    qDebug() << getServerIp();
 }
 
 
@@ -231,9 +232,8 @@ void Mainwindow::slotBurn()
         if (!getCertificaExist()) QMessageBox::information(this, tr("About Olric"),  tr("you must build server-"));
         else{
 
-
-
             rdesktop();
+            WriteRoute();
             buildCilentKey();
             orderClientCnf();
             cpCrtToClient();

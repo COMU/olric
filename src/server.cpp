@@ -14,6 +14,7 @@ Server::Server(QWidget *parent):QDialog(parent)
     connect(pushButton_cancel, SIGNAL(clicked()), this, SLOT(close()));
 
     rx_Email.setPattern( "\\b[A-Za-z0-9._%+-]{1,20}@[A-Za-z0-9.-]{1,10}\\.[A-Za-z]{2,4}\\b" );
+    rx_ipv4.setPattern("((2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)\\.){3}(2[0-5]{2}|2[0-4]\\d|1\\d{2}|[1-9]\\d|\\d)(/(3[012]|[12]\\d|\\d))?");
 }
 
 
@@ -105,10 +106,10 @@ void Server::serverConf()
     QFile serverFile("/etc/openvpn/server.conf");
     serverFile.open(QIODevice::WriteOnly);
 
-    QString content = " server yapılandırma dosys içerigi";
-
+    QString content_server_cnf = "local "+ getServerIp()
+                                 +"\nport 1194  \nproto tcp \ndev tun  \nca /etc/openvpn/keys/ca.crt  \ncert /etc/openvpn/keys/server.crt  \nkey /etc/openvpn/keys/server.key \ndh /etc/openvpn/keys/dh1024.pem  \nup /etc/openvpn/ip-config \nifconfig-pool-persist ipp.txt 20 \nduplicate-cn \nkeepalive 10 60 \nmax-clients 100 \ncomp-lzo \nuser nobody \ngroup nogroup \npersist-key \npersist-tun \nstatus /var/log/openvpn-status.log \nlog-append  /var/log/openvpn.log \nverb 9 \nmute 20  ";
     QTextStream outt(&serverFile);
-    outt << content;
+    outt << content_server_cnf;
     serverFile.close();
 
     openvpnDir.mkdir("keys");
@@ -131,13 +132,12 @@ void Server::serverConf()
     QFile ipConfigFile("/etc/openvpn/ip-config");
     ipConfigFile.open(QIODevice::WriteOnly);
 
-    content = " #!/bin/bash  \nINTERFACE=$1; shift;  \nip link set ${INTERFACE} up \nip addr add 10.11.1.1 peer 10.11.1.2 dev ${INTERFACE} \nip route add 10.11.1.0/24 dev ${INTERFACE} \nip route add 194.27.158.0/24 dev ${INTERFACE}\necho 1 > /proc/sys/net/ipv4/ip_forward\n";
+    QString content_ip_config = " #!/bin/bash   \nip route add 10.10.10.0 dev tun0 \nip route add "
+              + getServerIp() + " dev eth0   \necho 1 > /proc/sys/net/ipv4/ip_forward  \nexit 0";
 
     QTextStream out(&ipConfigFile);
-    out << content;
+    out << content_ip_config;
     ipConfigFile.close();
-
-
 }
 
 void Server::cleanAll()
@@ -256,6 +256,12 @@ bool Server::serverControl()
     if( Server_passwd->text().length() < 5  && Server_country->text().length() == 2 && Key_country->text().length() == 2 )
     {
         QMessageBox::critical(this, tr("False passwd"), tr("passwd must be minimum five chracters"));
+        return false;
+    }
+
+    if(!rx_ipv4.exactMatch( lineEdit_serverip->text() ))
+    {
+        QMessageBox::critical(this, tr("False server Ip"), tr("Please check field"));
         return false;
     }
     return true;

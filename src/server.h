@@ -13,6 +13,7 @@ class Server : public QDialog, private Ui::config_server
 private :
 
     QRegExp rx_Email;
+    QRegExp rx_ipv4;
 
 public:
     Server(QWidget *parent);

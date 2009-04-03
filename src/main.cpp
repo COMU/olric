@@ -36,7 +36,7 @@ int main(int argv, char *args[])
 
 
          qDebug()<<getOpenVPNPath()<< fileInfoList1.size()<< fileInfoList2.size() << fileInfoList3.size() << fileInfoList4.size() ;
-         QDir openvpnDir( "/home/meltem/openvpn" );
+
 
 
         Mainwindow main;

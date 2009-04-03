@@ -2,5 +2,5 @@
 <variable>    
 <vpn_tree_path value="/tmp" />    
 <openvpn_path value="/home/meltem/openvpn-2.0.9" />    
-<server_ip value="193.1.1.1" />
+<server_ip value="193.255.97.19" />
 </variable> 
