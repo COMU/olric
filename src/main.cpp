@@ -21,8 +21,7 @@ int main(int argv, char *args[])
     app.installTranslator(&translator);
 
     setVariable();
-
-
+ qDebug()<<"111111111111"<<getOpenVPNPath()<<getServerIp();
         QFileInfoList fileInfoList1 = fileExist( getOpenVPNPath()+"/keys" , "server.crt" );
         QFileInfoList fileInfoList2 = fileExist( getOpenVPNPath()+"/keys" , "ca.crt" );
         QFileInfoList fileInfoList3 = fileExist( getOpenVPNPath()+"/keys" , "dh1024.pem" );

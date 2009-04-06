@@ -204,28 +204,39 @@ void Server::cleanAll()
 void  Server::slotBurn()
 {
 
-     if( serverControl() )
-     {
+//     if( serverControl() )
+  //   {
 
-        QMessageBox::information( this , tr("Information") ,tr("Create the Server Certification ...") );
+      QMessageBox msgBox;
+      msgBox.setText("Server certification .");
+      msgBox.setInformativeText("Do you want to countinue?");
+      msgBox.setStandardButtons( QMessageBox::Discard | QMessageBox::Save);
+      msgBox.setDefaultButton(QMessageBox::Save);
+      int ret = msgBox.exec();
 
-        pushButton_cancel->hide();
+      switch (ret) {
+         case QMessageBox::Discard:
+             this->close();
+             break;
+         case QMessageBox::Save:
+              pushButton_cancel->hide();
 
-        writeVariablesToXml();
-        setVariable();
+              writeVariablesToXml();
+              setVariable();
 
-        cleanAll();
-        buildCertificateAuthority();
-        buildKeyServer();
-        buildDHParam();
+              cleanAll();
+              buildCertificateAuthority();
+              buildKeyServer();
+              buildDHParam();
 
-        serverConf();
+              serverConf();
 
-        setCertificaExist(true);
+              setCertificaExist(true);
 
-        this->close();
-
-      }
+              this->close();
+              break;
+          }
+    //  }
 }
 
 bool Server::serverControl()
@@ -266,7 +277,6 @@ bool Server::serverControl()
     }
     return true;
 }
-
 
  void Server::writeVariablesToXml()  // /home/meltem/openvpn-2.0.9/easy-rsa  /tmp /usr/bin/rdesktop
   {

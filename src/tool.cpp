@@ -102,7 +102,7 @@ bool setVariable()
 {
     QDomDocument doc;
     
-    QFile opmlFile( ":/olric.xml" );
+    QFile opmlFile( "/home/meltem/olric/resources/olric.xml" );        //qrc den alırsan yalnızca derleme anında okuma yapabiliyorsun!!!!!
     if ( !opmlFile.open( QFile::ReadOnly | QFile::Text) ) {
         return false;
     }
